@@ -1,0 +1,15 @@
+[
+    {
+      "id": "q1",
+      "type": "mcq",
+      "question": "Which of these is a valid React hook?",
+      "options": ["useClass", "useEffect", "useLoop", "useFetch"],
+      "correct_option": "useEffect"
+    },
+    {
+      "id": "q2",
+      "type": "code",
+      "question": "Build a counter component with increment/decrement buttons."
+    }
+  ]
+  

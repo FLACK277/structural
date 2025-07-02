@@ -1,0 +1,14 @@
+[
+  {
+    "id": "q1",
+    "type": "mcq",
+    "question": "What does REST stand for?",
+    "options": ["Representational State Transfer", "Remote Execution Service Technology", "Random Event Synchronous Transfer", "Relational Entity Service Table"],
+    "correct_option": "Representational State Transfer"
+  },
+  {
+    "id": "q2",
+    "type": "code",
+    "question": "Write a Python function to reverse a string."
+  }
+] 

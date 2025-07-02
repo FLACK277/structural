@@ -1,0 +1,760 @@
+2025-06-29 13:32:08,170 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:32:08,171 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:32:11,600 - huggingface_hub.file_download - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-06-29 13:32:24,578 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 13:32:24,580 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:32:24,580 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:32:27,187 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 13:32:27,187 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 13:32:27,187 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 13:32:28,080 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 13:32:28,087 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 13:32:28,088 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 13:33:45,966 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:33:45,966 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:33:49,871 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 13:33:49,874 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:33:49,874 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:33:52,568 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 13:33:52,568 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 13:33:52,568 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 13:33:53,448 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 13:33:54,023 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 13:33:54,034 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 13:35:20,851 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:35:20,852 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:35:24,221 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:35:24,221 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:35:24,694 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 13:35:24,697 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:35:24,697 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:35:27,314 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 13:35:27,315 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 13:35:27,315 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 13:35:27,889 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 13:35:28,140 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 13:35:28,142 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:35:28,143 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:35:28,263 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 13:35:28,272 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 13:35:30,809 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 13:35:30,809 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 13:35:30,810 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 13:35:31,540 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 13:35:31,545 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 13:35:31,545 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 13:36:02,568 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:36:02,568 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:36:04,910 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:36:04,910 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:36:06,375 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 13:36:06,377 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:36:06,377 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:36:09,025 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 13:36:09,025 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 13:36:09,025 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 13:36:09,422 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 13:36:09,424 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:36:09,424 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:36:09,594 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 13:36:10,032 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 13:36:10,041 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 13:36:12,068 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 13:36:12,068 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 13:36:12,068 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 13:36:12,647 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 13:36:12,651 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 13:36:12,651 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 13:36:51,582 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:36:51,583 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:36:54,001 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:36:54,001 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:36:55,322 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 13:36:55,323 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:36:55,324 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:36:57,936 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 13:36:57,937 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 13:36:57,937 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 13:36:58,511 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 13:36:58,568 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 13:36:58,570 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:36:58,570 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:36:58,828 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 13:36:58,838 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 13:37:01,214 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 13:37:01,214 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 13:37:01,214 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 13:37:02,072 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 13:37:02,079 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 13:37:02,080 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 13:40:30,775 - app.models.skill_matcher - ERROR - Error in BERT skill assessment: 'BERTEnhancedSkillAssessmentEngine' object has no attribute '_analyze_response_quality'
+2025-06-29 13:49:04,273 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:49:04,273 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:49:08,444 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:49:08,444 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:49:08,498 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 13:49:08,500 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:49:08,500 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:49:11,111 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 13:49:11,111 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 13:49:11,112 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 13:49:11,737 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 13:49:12,144 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 13:49:12,154 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 13:49:12,215 - app.models.skill_matcher - WARNING - spaCy model not found: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.. Attempting to download...
+2025-06-29 13:49:13,505 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 13:49:13,508 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:49:13,508 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:49:16,223 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 13:49:16,223 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 13:49:16,223 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 13:49:16,929 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 13:49:16,935 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 13:49:16,935 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 13:49:16,975 - app.models.skill_matcher - WARNING - spaCy model not found: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.. Attempting to download...
+2025-06-29 13:49:22,315 - app.models.skill_matcher - INFO - spaCy model downloaded and loaded successfully
+2025-06-29 13:49:22,316 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 13:49:22,319 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:49:22,319 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:49:25,353 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 13:49:25,354 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 13:49:25,354 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 13:49:25,354 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 13:49:25,603 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 13:49:25,660 - app.models.skill_matcher - INFO - spaCy model downloaded and loaded successfully
+2025-06-29 13:49:25,660 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 13:49:25,664 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:49:25,664 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:49:28,327 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 13:49:28,327 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 13:49:28,327 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 13:49:28,328 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 13:49:28,497 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 13:53:38,582 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:53:38,582 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:53:40,828 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:53:40,828 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:53:42,339 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 13:53:42,341 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:53:42,341 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:53:44,648 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 13:53:44,650 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:53:44,651 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:53:44,983 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 13:53:44,983 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 13:53:44,983 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 13:53:45,670 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 13:53:46,040 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 13:53:46,051 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 13:53:46,542 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 13:53:46,542 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 13:53:46,544 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:53:46,544 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:53:47,302 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 13:53:47,303 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 13:53:47,303 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 13:53:48,044 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 13:53:48,049 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 13:53:48,050 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 13:53:48,610 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 13:53:48,610 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 13:53:48,612 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:53:48,612 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:53:49,237 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 13:53:49,237 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 13:53:49,237 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 13:53:49,237 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 13:53:49,438 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 13:53:51,287 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 13:53:51,288 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 13:53:51,288 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 13:53:51,288 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 13:53:51,574 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 13:55:34,728 - app.routes.resume - INFO - Received file for parsing: resumeexamplefortesting.png, content_type: image/png
+2025-06-29 13:55:34,970 - app.models.skill_matcher - ERROR - Error extracting from image: tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-06-29 13:55:34,971 - app.routes.resume - INFO - Extracted 0 characters from resumeexamplefortesting.png
+2025-06-29 13:57:19,273 - app.routes.resume - INFO - Received file for parsing: resumeexamplefortesting2.png, content_type: image/png
+2025-06-29 13:57:19,299 - app.models.skill_matcher - ERROR - Error extracting from image: tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-06-29 13:57:19,300 - app.routes.resume - INFO - Extracted 0 characters from resumeexamplefortesting2.png
+2025-06-29 13:58:05,562 - app.routes.resume - INFO - Received file for parsing: image_2025-06-29_135737962.pdf, content_type: application/pdf
+2025-06-29 13:58:05,590 - app.routes.resume - INFO - Extracted 0 characters from image_2025-06-29_135737962.pdf
+2025-06-29 13:58:06,731 - app.routes.resume - INFO - Received file for parsing: image_2025-06-29_135737962.pdf, content_type: application/pdf
+2025-06-29 13:58:06,733 - app.routes.resume - INFO - Extracted 0 characters from image_2025-06-29_135737962.pdf
+2025-06-29 13:59:11,129 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:59:11,129 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:59:12,509 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:59:12,509 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:59:14,865 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 13:59:14,867 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:59:14,867 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:59:16,273 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 13:59:16,275 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:59:16,275 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:59:17,542 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 13:59:17,542 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 13:59:17,543 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 13:59:18,145 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 13:59:18,587 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 13:59:18,597 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 13:59:18,897 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 13:59:18,898 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 13:59:18,898 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 13:59:19,075 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 13:59:19,077 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 13:59:19,079 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:59:19,079 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:59:19,572 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 13:59:19,578 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 13:59:19,579 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 13:59:20,040 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 13:59:20,041 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 13:59:20,043 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 13:59:20,043 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 13:59:21,760 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 13:59:21,761 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 13:59:21,761 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 13:59:21,761 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 13:59:22,002 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 13:59:22,741 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 13:59:22,742 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 13:59:22,742 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 13:59:22,742 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 13:59:22,927 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 14:00:01,133 - app.routes.resume - INFO - Received file for parsing: resumeexamplefortesting2.png, content_type: image/png
+2025-06-29 14:00:01,172 - app.models.skill_matcher - ERROR - Error extracting from image: tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-06-29 14:00:01,173 - app.routes.resume - INFO - Extracted 0 characters from resumeexamplefortesting2.png
+2025-06-29 14:07:26,351 - app.routes.resume - INFO - Received file for parsing: pratyushexampleresume.pdf, content_type: application/pdf
+2025-06-29 14:07:26,418 - app.routes.resume - INFO - Extracted 2688 characters from pratyushexampleresume.pdf
+2025-06-29 14:09:40,684 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:09:40,684 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:09:43,112 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:09:43,113 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:09:45,697 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 14:09:45,698 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:09:45,699 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:09:46,953 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 14:09:46,955 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:09:46,955 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:09:48,299 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 14:09:48,299 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 14:09:48,299 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 14:09:48,959 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 14:09:49,485 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 14:09:49,495 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 14:09:49,565 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 14:09:49,565 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 14:09:49,565 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 14:09:49,984 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 14:09:49,985 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 14:09:49,987 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:09:49,987 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:09:50,314 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 14:09:50,320 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 14:09:50,320 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 14:09:50,775 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 14:09:50,776 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 14:09:50,777 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:09:50,777 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:09:52,596 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 14:09:52,596 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 14:09:52,596 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 14:09:52,597 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 14:09:52,797 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 14:09:53,479 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 14:09:53,479 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 14:09:53,479 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 14:09:53,479 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 14:09:53,770 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 14:10:33,238 - app.routes.resume - INFO - Received file for parsing: pratyushexampleresume.pdf, content_type: application/pdf
+2025-06-29 14:10:33,288 - app.routes.resume - INFO - Extracted 2688 characters from pratyushexampleresume.pdf
+2025-06-29 14:13:33,593 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:13:33,594 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:13:37,287 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 14:13:37,289 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:13:37,289 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:13:39,865 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 14:13:39,865 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 14:13:39,865 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 14:13:40,555 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 14:13:40,561 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 14:13:40,562 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 14:13:41,080 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 14:13:41,080 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 14:13:41,082 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:13:41,082 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:13:43,674 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 14:13:43,674 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 14:13:43,675 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 14:13:43,675 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 14:13:43,836 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 14:13:43,864 - app.routes.resume - INFO - Received file for parsing: pratyushexampleresume.pdf, content_type: application/pdf
+2025-06-29 14:13:43,925 - app.routes.resume - INFO - Extracted 2688 characters from pratyushexampleresume.pdf
+2025-06-29 14:14:22,734 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:14:22,734 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:14:27,458 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 14:14:27,460 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:14:27,460 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:14:30,126 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 14:14:30,126 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 14:14:30,126 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 14:14:31,272 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 14:14:31,282 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 14:14:31,283 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 14:14:31,777 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 14:14:31,778 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 14:14:31,780 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:14:31,780 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:14:34,383 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 14:14:34,383 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 14:14:34,383 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 14:14:34,383 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 14:14:34,564 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 14:25:08,886 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:25:08,886 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:25:14,350 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 14:25:14,352 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:25:14,352 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:25:17,073 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 14:25:17,073 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 14:25:17,073 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 14:25:17,951 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 14:25:17,959 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 14:25:17,959 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 14:25:18,546 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 14:25:18,546 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 14:25:18,548 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:25:18,548 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:25:21,389 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 14:25:21,390 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 14:25:21,390 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 14:25:21,390 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 14:25:21,851 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 14:37:05,477 - app.models.skill_matcher - ERROR - Error in BERT skill assessment: 'BERTEnhancedSkillAssessmentEngine' object has no attribute '_get_skill_recommendations'
+2025-06-29 14:39:02,436 - app.models.skill_matcher - ERROR - Error in BERT skill assessment: 'BERTEnhancedSkillAssessmentEngine' object has no attribute '_get_skill_recommendations'
+2025-06-29 14:41:45,185 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:41:45,185 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:41:49,576 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 14:41:49,579 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:41:49,580 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:41:52,304 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 14:41:52,305 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 14:41:52,305 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 14:41:53,067 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 14:41:53,074 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 14:41:53,075 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 14:41:53,513 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 14:41:53,513 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 14:41:53,515 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:41:53,515 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:41:56,209 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 14:41:56,209 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 14:41:56,210 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 14:41:56,210 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 14:41:56,478 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 14:47:45,688 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:47:45,689 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:47:50,021 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 14:47:50,023 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:47:50,023 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:47:53,026 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 14:47:53,027 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 14:47:53,027 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 14:47:53,775 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 14:47:53,782 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 14:47:53,783 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 14:47:54,308 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 14:47:54,308 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 14:47:54,311 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:47:54,311 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:47:56,907 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 14:47:56,908 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 14:47:56,908 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 14:47:56,908 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 14:47:57,220 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 14:51:49,716 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:51:49,716 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:51:54,346 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 14:51:54,349 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:51:54,349 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:51:57,004 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 14:51:57,004 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 14:51:57,005 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 14:51:57,773 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 14:51:57,778 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 14:51:57,778 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 14:51:58,257 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 14:51:58,258 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 14:51:58,260 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:51:58,260 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:52:00,914 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 14:52:00,914 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 14:52:00,914 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 14:52:00,915 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 14:52:01,184 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 14:52:19,617 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:52:19,618 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:52:23,440 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 14:52:23,443 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:52:23,443 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:52:26,058 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 14:52:26,058 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 14:52:26,058 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 14:52:27,063 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 14:52:27,068 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 14:52:27,069 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 14:52:27,546 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 14:52:27,546 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 14:52:27,548 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:52:27,548 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:52:30,175 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 14:52:30,175 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 14:52:30,176 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 14:52:30,176 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 14:52:30,428 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 14:53:22,963 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:53:22,963 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:53:27,826 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 14:53:27,828 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:53:27,829 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:53:30,648 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 14:53:30,649 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 14:53:30,649 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 14:53:31,723 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 14:53:31,733 - app.models.skill_matcher - ERROR - Error building TensorFlow model: The added layer must be an instance of class Layer. Received: layer=<Dense name=dense, built=False> of type <class 'keras.src.layers.core.dense.Dense'>.
+2025-06-29 14:53:31,733 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 14:53:32,449 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 14:53:32,449 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 14:53:32,453 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 14:53:32,453 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 14:53:35,089 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 14:53:35,091 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 14:53:35,091 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 14:53:35,091 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 14:53:35,345 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 15:12:51,497 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:12:51,497 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:12:55,749 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 15:12:55,752 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:12:55,752 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:12:58,370 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 15:12:58,370 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 15:12:58,370 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 15:12:59,319 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 15:12:59,751 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 15:12:59,761 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 15:13:00,412 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 15:13:00,412 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 15:13:00,414 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:13:00,415 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:13:03,302 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 15:13:03,302 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 15:13:03,303 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 15:13:03,303 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 15:13:03,748 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 15:21:15,823 - app.models.skill_matcher - ERROR - TensorFlow prediction error: in user code:
+
+    File "C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\engine\training.py", line 2436, in predict_function  *
+        return step_function(self, iterator)
+    File "C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\engine\training.py", line 2421, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\engine\training.py", line 2409, in run_step  **
+        outputs = model.predict_step(data)
+    File "C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\engine\training.py", line 2377, in predict_step
+        return self(x, training=False)
+    File "C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\utils\traceback_utils.py", line 70, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\engine\input_spec.py", line 253, in assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Exception encountered when calling layer 'sequential' (type Sequential).
+    
+    Input 0 of layer "dense" is incompatible with the layer: expected min_ndim=2, found ndim=1. Full shape received: (None,)
+    
+    Call arguments received by layer 'sequential' (type Sequential):
+      � inputs=('tf.Tensor(shape=(None,), dtype=float32)',)
+      � training=False
+      � mask=None
+
+2025-06-29 15:22:29,168 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:22:29,169 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:22:33,410 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 15:22:33,414 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:22:33,414 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:22:36,033 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 15:22:36,033 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 15:22:36,033 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 15:22:36,684 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 15:22:37,239 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 15:22:37,254 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 15:22:37,750 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 15:22:37,750 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 15:22:37,753 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:22:37,753 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:22:40,425 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 15:22:40,426 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 15:22:40,426 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 15:22:40,427 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 15:22:40,751 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 15:22:58,548 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:22:58,549 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:23:02,748 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 15:23:02,750 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:23:02,751 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:23:05,395 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 15:23:05,396 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 15:23:05,396 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 15:23:06,284 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 15:23:06,954 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 15:23:06,973 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 15:23:07,610 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 15:23:07,611 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 15:23:07,613 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:23:07,613 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:23:10,392 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 15:23:10,392 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 15:23:10,392 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 15:23:10,393 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 15:23:10,652 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 15:27:59,046 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:27:59,047 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:28:03,415 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 15:28:03,417 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:28:03,417 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:28:06,072 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 15:28:06,073 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 15:28:06,073 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 15:28:06,919 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 15:28:07,330 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 15:28:07,342 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 15:28:07,829 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 15:28:07,829 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 15:28:07,831 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:28:07,831 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:28:10,514 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 15:28:10,515 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 15:28:10,515 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 15:28:10,515 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 15:28:10,713 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 15:28:27,614 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:28:27,614 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:28:32,146 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 15:28:32,148 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:28:32,148 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:28:34,800 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 15:28:34,800 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 15:28:34,800 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 15:28:35,323 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 15:28:35,679 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 15:28:35,690 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 15:28:36,165 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 15:28:36,165 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 15:28:36,167 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:28:36,167 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:28:38,813 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 15:28:38,814 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 15:28:38,814 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 15:28:38,814 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 15:28:39,007 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 15:30:03,048 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:31:30,647 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:31:30,647 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:31:34,361 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 15:31:34,363 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:31:34,363 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:31:37,003 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 15:31:37,003 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 15:31:37,004 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 15:31:37,790 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 15:31:38,224 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 15:31:38,233 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 15:31:38,734 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 15:31:38,735 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 15:31:38,737 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:31:38,737 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:31:41,335 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 15:31:41,336 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 15:31:41,336 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 15:31:41,336 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 15:31:41,551 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 15:32:10,270 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:35:23,656 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:35:23,656 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:35:27,736 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 15:35:27,739 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:35:27,740 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:35:31,120 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 15:35:31,120 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 15:35:31,120 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 15:35:31,793 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 15:35:32,218 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 15:35:32,226 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 15:35:32,678 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 15:35:32,679 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 15:35:32,680 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:35:32,680 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:35:35,596 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 15:35:35,596 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 15:35:35,596 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 15:35:35,597 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 15:35:35,766 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 15:36:17,797 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:40:23,872 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:40:23,872 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:40:27,674 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 15:40:27,676 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:40:27,676 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:40:30,283 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 15:40:30,283 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 15:40:30,284 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 15:40:30,995 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 15:40:31,330 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 15:40:31,342 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 15:40:31,808 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 15:40:31,808 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 15:40:31,810 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:40:31,810 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:40:34,439 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 15:40:34,439 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 15:40:34,439 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 15:40:34,439 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 15:40:34,612 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 15:40:44,669 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:40:44,841 - app.routes.assessment - INFO - User current skills: []
+2025-06-29 15:42:35,128 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:42:35,201 - app.routes.assessment - INFO - User current skills: ['python']
+2025-06-29 15:42:50,099 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:42:50,158 - app.routes.assessment - INFO - User current skills: []
+2025-06-29 15:42:58,144 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:42:58,230 - app.routes.assessment - INFO - User current skills: []
+2025-06-29 15:43:03,528 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:43:03,588 - app.routes.assessment - INFO - User current skills: []
+2025-06-29 15:43:07,534 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:43:07,604 - app.routes.assessment - INFO - User current skills: ['python']
+2025-06-29 15:43:14,515 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:43:14,580 - app.routes.assessment - INFO - User current skills: []
+2025-06-29 15:43:23,492 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:43:23,557 - app.routes.assessment - INFO - User current skills: ['python']
+2025-06-29 15:43:29,974 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:43:30,042 - app.routes.assessment - INFO - User current skills: ['python']
+2025-06-29 15:43:34,789 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:43:34,862 - app.routes.assessment - INFO - User current skills: ['python']
+2025-06-29 15:43:41,513 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:43:41,574 - app.routes.assessment - INFO - User current skills: ['python']
+2025-06-29 15:43:49,151 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:43:49,214 - app.routes.assessment - INFO - User current skills: ['python']
+2025-06-29 15:44:55,017 - app.models.skill_matcher - INFO - Feature vector shape before returning: (1, 10)
+2025-06-29 15:44:55,079 - app.routes.assessment - INFO - User current skills: ['python']
+2025-06-29 15:46:23,685 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:46:23,686 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:46:28,264 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 15:46:28,266 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:46:28,266 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:46:30,970 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 15:46:30,971 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 15:46:30,971 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 15:46:31,417 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 15:46:31,733 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 15:46:31,742 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 15:46:32,185 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 15:46:32,185 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 15:46:32,187 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:46:32,187 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:46:34,853 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 15:46:34,853 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 15:46:34,853 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 15:46:34,854 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 15:46:35,069 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 15:46:49,576 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:46:49,576 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:46:53,338 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 15:46:53,341 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:46:53,341 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:46:55,980 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 15:46:55,981 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 15:46:55,981 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 15:46:56,476 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 15:46:56,798 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 15:46:56,806 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 15:46:57,263 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 15:46:57,263 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 15:46:57,265 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 15:46:57,265 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 15:46:59,983 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 15:46:59,983 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 15:46:59,983 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 15:46:59,984 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 15:47:00,172 - app.models.skill_matcher - INFO - Built embeddings for 162 skills
+2025-06-29 22:04:43,126 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 22:04:43,126 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 22:04:47,054 - app.models.skill_matcher - INFO - BERT model initialized for skill assessment
+2025-06-29 22:04:47,056 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 22:04:47,056 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 22:04:49,698 - app.models.skill_matcher - INFO - BERT model initialized for skill gap analysis
+2025-06-29 22:04:49,699 - app.models.skill_matcher - INFO - Job market data loaded for 6 roles
+2025-06-29 22:04:49,699 - app.models.skill_matcher - INFO - Skill gap analyzer initialized
+2025-06-29 22:04:50,199 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2025-06-29 22:04:50,519 - tensorflow - WARNING - From C:\Users\praty\SkillBridge\backend\.venv\Lib\site-packages\tf_keras\src\optimizers\__init__.py:317: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2025-06-29 22:04:50,528 - app.models.skill_matcher - INFO - TensorFlow assessment model built
+2025-06-29 22:04:51,031 - app.models.skill_matcher - INFO - spaCy model loaded successfully
+2025-06-29 22:04:51,032 - app.models.skill_matcher - INFO - Loading BERT model: all-MiniLM-L6-v2
+2025-06-29 22:04:51,034 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-06-29 22:04:51,034 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-29 22:04:53,654 - app.models.skill_matcher - INFO - BERT model loaded successfully
+2025-06-29 22:04:53,654 - app.models.skill_matcher - INFO - TF-IDF vectorizer initialized successfully
+2025-06-29 22:04:53,654 - app.models.skill_matcher - INFO - Skill database initialized with 162 skills
+2025-06-29 22:04:53,655 - app.models.skill_matcher - INFO - Building BERT embeddings for skill database...
+2025-06-29 22:04:53,918 - app.models.skill_matcher - INFO - Built embeddings for 162 skills

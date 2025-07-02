@@ -1,0 +1,14 @@
+[
+  {
+    "id": "q1",
+    "type": "mcq",
+    "question": "Which tool is commonly used for containerization?",
+    "options": ["Docker", "Jenkins", "Ansible", "Nagios"],
+    "correct_option": "Docker"
+  },
+  {
+    "id": "q2",
+    "type": "code",
+    "question": "Write a shell command to list all running Docker containers."
+  }
+] 

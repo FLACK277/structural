@@ -1,0 +1,14 @@
+[
+  {
+    "id": "q1",
+    "type": "mcq",
+    "question": "What is the main goal of UX design?",
+    "options": ["Enhance user satisfaction", "Increase code efficiency", "Improve server uptime", "Reduce memory usage"],
+    "correct_option": "Enhance user satisfaction"
+  },
+  {
+    "id": "q2",
+    "type": "code",
+    "question": "Design a simple wireframe for a login page. (Describe or sketch in text)"
+  }
+] 
