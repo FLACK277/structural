@@ -1,5 +1,5 @@
 import pandas as pd
-import numpy as np
+import numpy as n
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import MinMaxScaler
 from sentence_transformers import SentenceTransformer
