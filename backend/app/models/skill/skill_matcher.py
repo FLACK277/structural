@@ -1829,15 +1829,15 @@ class VisualizationEngine:
             logger.error(f"Error creating assessment chart: {e}")
             return "error"
 
-# Flask Application with all original routes + BERT enhancement
-app = Flask(__name__)
-app.secret_key = 'bert_enhanced_skill_bridge_2025'
-app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+# # Flask Application with all original routes + BERT enhancement
+# app = Flask(__name__)
+# app.secret_key = 'bert_enhanced_skill_bridge_2025'
+# app.config['UPLOAD_FOLDER'] = 'uploads'
+# app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-# Ensure directories exist
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-os.makedirs('static/visualizations', exist_ok=True)
+# # Ensure directories exist
+# os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+# os.makedirs('static/visualizations', exist_ok=True)
 
 # Initialize BERT-enhanced system
 bert_learning_system = PersonalizedLearningSystem()
@@ -1899,359 +1899,359 @@ def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'txt', 'doc', 'docx'}
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# Authentication routes
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
+# # Authentication routes
+# @app.route('/register', methods=['GET', 'POST'])
+# def register():
+#     if request.method == 'POST':
+#         username = request.form['username']
+#         email = request.form['email']
+#         password = request.form['password']
 
-        if not username or not email or not password:
-            flash('All fields are required!', 'error')
-            return render_template('register.html')
+#         if not username or not email or not password:
+#             flash('All fields are required!', 'error')
+#             return render_template('register.html')
 
-        user_id = str(uuid.uuid4())
-        password_hash = generate_password_hash(password)
+#         user_id = str(uuid.uuid4())
+#         password_hash = generate_password_hash(password)
 
-        try:
-            conn = sqlite3.connect('learning_system.db')
-            cursor = conn.cursor()
-            cursor.execute('''INSERT INTO users (user_id, username, email, password_hash) VALUES (?, ?, ?, ?)''', 
-                         (user_id, username, email, password_hash))
-            conn.commit()
-            conn.close()
+#         try:
+#             conn = sqlite3.connect('learning_system.db')
+#             cursor = conn.cursor()
+#             cursor.execute('''INSERT INTO users (user_id, username, email, password_hash) VALUES (?, ?, ?, ?)''', 
+#                          (user_id, username, email, password_hash))
+#             conn.commit()
+#             conn.close()
 
-            flash('Registration successful! Please login.', 'success')
-            return redirect(url_for('login'))
+#             flash('Registration successful! Please login.', 'success')
+#             return redirect(url_for('login'))
 
-        except sqlite3.IntegrityError:
-            flash('Username or email already exists!', 'error')
-            return render_template('register.html')
+#         except sqlite3.IntegrityError:
+#             flash('Username or email already exists!', 'error')
+#             return render_template('register.html')
 
-    return render_template('register.html')
+#     return render_template('register.html')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     if request.method == 'POST':
+#         username = request.form['username']
+#         password = request.form['password']
 
-        conn = sqlite3.connect('learning_system.db')
-        cursor = conn.cursor()
-        cursor.execute('SELECT user_id, password_hash FROM users WHERE username = ?', (username,))
-        user = cursor.fetchone()
-        conn.close()
+#         conn = sqlite3.connect('learning_system.db')
+#         cursor = conn.cursor()
+#         cursor.execute('SELECT user_id, password_hash FROM users WHERE username = ?', (username,))
+#         user = cursor.fetchone()
+#         conn.close()
 
-        if user and check_password_hash(user[1], password):
-            session['user_id'] = user[0]
-            session['username'] = username
+#         if user and check_password_hash(user[1], password):
+#             session['user_id'] = user[0]
+#             session['username'] = username
 
-            # Update last login
-            conn = sqlite3.connect('learning_system.db')
-            cursor = conn.cursor()
-            cursor.execute('UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE user_id = ?', (user[0],))
-            conn.commit()
-            conn.close()
+#             # Update last login
+#             conn = sqlite3.connect('learning_system.db')
+#             cursor = conn.cursor()
+#             cursor.execute('UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE user_id = ?', (user[0],))
+#             conn.commit()
+#             conn.close()
 
-            flash('Login successful!', 'success')
-            return redirect(url_for('dashboard'))
-        else:
-            flash('Invalid username or password!', 'error')
+#             flash('Login successful!', 'success')
+#             return redirect(url_for('dashboard'))
+#         else:
+#             flash('Invalid username or password!', 'error')
 
-    return render_template('login.html')
+#     return render_template('login.html')
 
-@app.route('/logout')
-def logout():
-    session.clear()
-    flash('You have been logged out.', 'info')
-    return redirect(url_for('index'))
+# @app.route('/logout')
+# def logout():
+#     session.clear()
+#     flash('You have been logged out.', 'info')
+#     return redirect(url_for('index'))
 
-# Profile setup route with BERT enhancement
-@app.route('/profile_setup', methods=['GET', 'POST'])
-def profile_setup():
-    if 'user_id' not in session:
-        return redirect(url_for('login'))
+# # Profile setup route with BERT enhancement
+# @app.route('/profile_setup', methods=['GET', 'POST'])
+# def profile_setup():
+#     if 'user_id' not in session:
+#         return redirect(url_for('login'))
 
-    if request.method == 'POST':
-        user_id = session['user_id']
+#     if request.method == 'POST':
+#         user_id = session['user_id']
 
-        current_skills = request.form.getlist('current_skills[]')
-        current_levels = request.form.getlist('current_levels[]')
-        target_skills = request.form.getlist('target_skills[]')
+#         current_skills = request.form.getlist('current_skills[]')
+#         current_levels = request.form.getlist('current_levels[]')
+#         target_skills = request.form.getlist('target_skills[]')
 
-        resume_path = None
-        certificate_paths = []
+#         resume_path = None
+#         certificate_paths = []
 
-        # Handle resume upload
-        if 'resume' in request.files:
-            resume_file = request.files['resume']
-            if resume_file and resume_file.filename and allowed_file(resume_file.filename):
-                filename = secure_filename(resume_file.filename)
-                filename = f"{user_id}_resume_{filename}"
-                resume_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                resume_file.save(resume_path)
-                save_file_upload(user_id, filename, 'resume', resume_path)
+#         # Handle resume upload
+#         if 'resume' in request.files:
+#             resume_file = request.files['resume']
+#             if resume_file and resume_file.filename and allowed_file(resume_file.filename):
+#                 filename = secure_filename(resume_file.filename)
+#                 filename = f"{user_id}_resume_{filename}"
+#                 resume_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+#                 resume_file.save(resume_path)
+#                 save_file_upload(user_id, filename, 'resume', resume_path)
 
-        # Handle certificate uploads
-        if 'certificates' in request.files:
-            cert_files = request.files.getlist('certificates')
-            for cert_file in cert_files:
-                if cert_file and cert_file.filename and allowed_file(cert_file.filename):
-                    filename = secure_filename(cert_file.filename)
-                    filename = f"{user_id}_cert_{filename}"
-                    cert_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                    cert_file.save(cert_path)
-                    certificate_paths.append(cert_path)
-                    save_file_upload(user_id, filename, 'certificate', cert_path)
+#         # Handle certificate uploads
+#         if 'certificates' in request.files:
+#             cert_files = request.files.getlist('certificates')
+#             for cert_file in cert_files:
+#                 if cert_file and cert_file.filename and allowed_file(cert_file.filename):
+#                     filename = secure_filename(cert_file.filename)
+#                     filename = f"{user_id}_cert_{filename}"
+#                     cert_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+#                     cert_file.save(cert_path)
+#                     certificate_paths.append(cert_path)
+#                     save_file_upload(user_id, filename, 'certificate', cert_path)
 
-        # Create manual skills
-        manual_skills = []
-        for skill, level in zip(current_skills, current_levels):
-            if skill.strip():
-                try:
-                    level_float = float(level) / 100.0
-                    manual_skills.append(Skill(
-                        name=skill.strip(),
-                        level=level_float,
-                        category=categorize_skill(skill.strip()),
-                        confidence=0.8,
-                        source='user_input'
-                    ))
-                except ValueError:
-                    continue
+#         # Create manual skills
+#         manual_skills = []
+#         for skill, level in zip(current_skills, current_levels):
+#             if skill.strip():
+#                 try:
+#                     level_float = float(level) / 100.0
+#                     manual_skills.append(Skill(
+#                         name=skill.strip(),
+#                         level=level_float,
+#                         category=categorize_skill(skill.strip()),
+#                         confidence=0.8,
+#                         source='user_input'
+#                     ))
+#                 except ValueError:
+#                     continue
 
-        try:
-            # Process with BERT enhancement
-            profile_result = bert_learning_system.process_user_profile(
-                user_id=user_id,
-                resume_path=resume_path,
-                certificate_paths=certificate_paths,
-                target_skills=[s.strip() for s in target_skills if s.strip()],
-                name=request.form.get('name'),
-                headline=request.form.get('headline'),
-                education=request.form.getlist('education[]'),
-                location=request.form.get('location'),
-                career_goal=request.form.get('career_goal')
-            )
+#         try:
+#             # Process with BERT enhancement
+#             profile_result = bert_learning_system.process_user_profile(
+#                 user_id=user_id,
+#                 resume_path=resume_path,
+#                 certificate_paths=certificate_paths,
+#                 target_skills=[s.strip() for s in target_skills if s.strip()],
+#                 name=request.form.get('name'),
+#                 headline=request.form.get('headline'),
+#                 education=request.form.getlist('education[]'),
+#                 location=request.form.get('location'),
+#                 career_goal=request.form.get('career_goal')
+#             )
 
-            # Add manual skills
-            if user_id in bert_learning_system.user_profiles:
-                bert_learning_system.user_profiles[user_id]['skills'].extend(manual_skills)
+#             # Add manual skills
+#             if user_id in bert_learning_system.user_profiles:
+#                 bert_learning_system.user_profiles[user_id]['skills'].extend(manual_skills)
 
-            save_user_profile(user_id, profile_result)
+#             save_user_profile(user_id, profile_result)
 
-            flash('Profile created successfully with BERT analysis!', 'success')
-            return redirect(url_for('dashboard'))
+#             flash('Profile created successfully with BERT analysis!', 'success')
+#             return redirect(url_for('dashboard'))
 
-        except Exception as e:
-            flash(f'Error processing profile: {str(e)}', 'error')
-            logger.error(f"Profile setup error: {e}")
-            return render_template('profile_setup.html')
+#         except Exception as e:
+#             flash(f'Error processing profile: {str(e)}', 'error')
+#             logger.error(f"Profile setup error: {e}")
+#             return render_template('profile_setup.html')
 
-    return render_template('profile_setup.html')
+#     return render_template('profile_setup.html')
 
-# BERT-enhanced dashboard
-@app.route('/dashboard')
-def dashboard():
-    if 'user_id' not in session:
-        return redirect(url_for('login'))
+# # BERT-enhanced dashboard
+# @app.route('/dashboard')
+# def dashboard():
+#     if 'user_id' not in session:
+#         return redirect(url_for('login'))
 
-    user_id = session['user_id']
-    profile_data = get_user_profile(user_id)
-    if not profile_data:
-        return redirect(url_for('profile_setup'))
+#     user_id = session['user_id']
+#     profile_data = get_user_profile(user_id)
+#     if not profile_data:
+#         return redirect(url_for('profile_setup'))
 
-    # Get BERT-enhanced dashboard data
-    dashboard_data = bert_learning_system.get_dashboard_data(user_id)
+#     # Get BERT-enhanced dashboard data
+#     dashboard_data = bert_learning_system.get_dashboard_data(user_id)
     
-    # Generate visualizations
-    if user_id in bert_learning_system.user_profiles:
-        skills = bert_learning_system.user_profiles[user_id]['skills']
+#     # Generate visualizations
+#     if user_id in bert_learning_system.user_profiles:
+#         skills = bert_learning_system.user_profiles[user_id]['skills']
         
-        # Create skill radar chart
-        radar_path = f'static/visualizations/{user_id}_skills_radar.png'
-        visualization_engine.plot_skill_radar(skills, radar_path)
+#         # Create skill radar chart
+#         radar_path = f'static/visualizations/{user_id}_skills_radar.png'
+#         visualization_engine.plot_skill_radar(skills, radar_path)
         
-        # Create learning progress chart if learning path exists
-        learning_path = bert_learning_system.user_profiles[user_id].get('learning_path')
-        if learning_path:
-            progress_path = f'static/visualizations/{user_id}_progress.png'
-            visualization_engine.plot_learning_progress(learning_path, save_path=progress_path)
+#         # Create learning progress chart if learning path exists
+#         learning_path = bert_learning_system.user_profiles[user_id].get('learning_path')
+#         if learning_path:
+#             progress_path = f'static/visualizations/{user_id}_progress.png'
+#             visualization_engine.plot_learning_progress(learning_path, save_path=progress_path)
 
-    return render_template('dashboard.html', 
-                         dashboard_data=dashboard_data,
-                         username=session.get('username'))
+#     return render_template('dashboard.html', 
+#                          dashboard_data=dashboard_data,
+#                          username=session.get('username'))
 
-# Skill assessment route
-@app.route('/assessment/<skill>')
-def skill_assessment(skill):
-    if 'user_id' not in session:
-        return redirect(url_for('login'))
+# # Skill assessment route
+# @app.route('/assessment/<skill>')
+# def skill_assessment(skill):
+#     if 'user_id' not in session:
+#         return redirect(url_for('login'))
     
-    return render_template('assessment.html', skill=skill)
+#     return render_template('assessment.html', skill=skill)
 
-@app.route('/conduct_assessment', methods=['POST'])
-def conduct_assessment():
-    if 'user_id' not in session:
-        return jsonify({'error': 'Not authenticated'}), 401
+# @app.route('/conduct_assessment', methods=['POST'])
+# def conduct_assessment():
+#     if 'user_id' not in session:
+#         return jsonify({'error': 'Not authenticated'}), 401
     
-    try:
-        data = request.get_json()
-        user_id = session['user_id']
-        skill = data.get('skill')
-        num_questions = data.get('num_questions', 10)
+#     try:
+#         data = request.get_json()
+#         user_id = session['user_id']
+#         skill = data.get('skill')
+#         num_questions = data.get('num_questions', 10)
         
-        # Conduct BERT-enhanced assessment
-        assessment_result = bert_learning_system.assessment_engine.conduct_assessment(
-            user_id, skill, num_questions
-        )
+#         # Conduct BERT-enhanced assessment
+#         assessment_result = bert_learning_system.assessment_engine.conduct_assessment(
+#             user_id, skill, num_questions
+#         )
         
-        # Save assessment result
-        save_assessment_result(user_id, assessment_result)
+#         # Save assessment result
+#         save_assessment_result(user_id, assessment_result)
         
-        return jsonify(assessment_result)
+#         return jsonify(assessment_result)
         
-    except Exception as e:
-        logger.error(f"Assessment error: {e}")
-        return jsonify({'error': str(e)}), 500
+#     except Exception as e:
+#         logger.error(f"Assessment error: {e}")
+#         return jsonify({'error': str(e)}), 500
 
-# Learning path route
-@app.route('/learning_path')
-def learning_path():
-    if 'user_id' not in session:
-        return redirect(url_for('login'))
+# # Learning path route
+# @app.route('/learning_path')
+# def learning_path():
+#     if 'user_id' not in session:
+#         return redirect(url_for('login'))
     
-    user_id = session['user_id']
+#     user_id = session['user_id']
     
-    if user_id in bert_learning_system.user_profiles:
-        learning_path = bert_learning_system.user_profiles[user_id].get('learning_path')
-        return render_template('learning_path.html', learning_path=learning_path)
+#     if user_id in bert_learning_system.user_profiles:
+#         learning_path = bert_learning_system.user_profiles[user_id].get('learning_path')
+#         return render_template('learning_path.html', learning_path=learning_path)
     
-    return redirect(url_for('profile_setup'))
+#     return redirect(url_for('profile_setup'))
 
-# API endpoints
-@app.route('/upload_resume', methods=['POST'])
-def upload_resume():
-    try:
-        user_id = request.form.get('userId') or session.get('user_id')
-        resume_file = request.files.get('resume')
-        manual_skills_json = request.form.get('manual_skills')
+# # API endpoints
+# @app.route('/upload_resume', methods=['POST'])
+# def upload_resume():
+#     try:
+#         user_id = request.form.get('userId') or session.get('user_id')
+#         resume_file = request.files.get('resume')
+#         manual_skills_json = request.form.get('manual_skills')
 
-        manual_skills = []
-        if manual_skills_json:
-            manual_skills = json.loads(manual_skills_json)
+#         manual_skills = []
+#         if manual_skills_json:
+#             manual_skills = json.loads(manual_skills_json)
 
-        # Process with BERT enhancement
-        result = bert_learning_system.process_user_profile(
-            user_id=user_id,
-            resume_path=resume_file,
-            target_skills=[]
-        )
+#         # Process with BERT enhancement
+#         result = bert_learning_system.process_user_profile(
+#             user_id=user_id,
+#             resume_path=resume_file,
+#             target_skills=[]
+#         )
 
-        return jsonify({
-            'status': 'success',
-            'message': 'Resume processed with BERT analysis',
-            'user_id': user_id,
-            'bert_analysis': result,
-            'extracted_skills': result.get('extracted_skills', [])
-        })
+#         return jsonify({
+#             'status': 'success',
+#             'message': 'Resume processed with BERT analysis',
+#             'user_id': user_id,
+#             'bert_analysis': result,
+#             'extracted_skills': result.get('extracted_skills', [])
+#         })
 
-    except Exception as e:
-        logger.error(f"Error in upload_resume: {e}")
-        return jsonify({'status': 'error', 'message': str(e)}), 500
+#     except Exception as e:
+#         logger.error(f"Error in upload_resume: {e}")
+#         return jsonify({'status': 'error', 'message': str(e)}), 500
 
-@app.route('/skill_gap_analysis', methods=['POST'])
-def skill_gap_analysis():
-    try:
-        data = request.get_json()
-        user_skills = data.get('skills', [])
-        target_job = data.get('target_job', '')
+# @app.route('/skill_gap_analysis', methods=['POST'])
+# def skill_gap_analysis():
+#     try:
+#         data = request.get_json()
+#         user_skills = data.get('skills', [])
+#         target_job = data.get('target_job', '')
 
-        if not user_skills or not target_job:
-            return jsonify({'error': 'Skills and target job required'}), 400
+#         if not user_skills or not target_job:
+#             return jsonify({'error': 'Skills and target job required'}), 400
 
-        # BERT-powered skill gap analysis
-        gap_analysis = bert_learning_system.path_generator.skill_gap_analyzer.analyze_skill_gaps(
-            user_skills, target_job
-        )
+#         # BERT-powered skill gap analysis
+#         gap_analysis = bert_learning_system.path_generator.skill_gap_analyzer.analyze_skill_gaps(
+#             user_skills, target_job
+#         )
 
-        if 'skill_gaps' in gap_analysis:
-            roadmap = bert_learning_system.path_generator.skill_gap_analyzer.generate_learning_roadmap(
-                gap_analysis['skill_gaps']
-            )
-            gap_analysis['learning_roadmap'] = roadmap
+#         if 'skill_gaps' in gap_analysis:
+#             roadmap = bert_learning_system.path_generator.skill_gap_analyzer.generate_learning_roadmap(
+#                 gap_analysis['skill_gaps']
+#             )
+#             gap_analysis['learning_roadmap'] = roadmap
 
-        return jsonify(gap_analysis)
+#         return jsonify(gap_analysis)
 
-    except Exception as e:
-        logger.error(f"Error in skill gap analysis: {e}")
-        return jsonify({'error': str(e)}), 500
+#     except Exception as e:
+#         logger.error(f"Error in skill gap analysis: {e}")
+#         return jsonify({'error': str(e)}), 500
 
-@app.route('/update_progress', methods=['POST'])
-def update_progress():
-    if 'user_id' not in session:
-        return jsonify({'error': 'Not authenticated'}), 401
+# @app.route('/update_progress', methods=['POST'])
+# def update_progress():
+#     if 'user_id' not in session:
+#         return jsonify({'error': 'Not authenticated'}), 401
     
-    try:
-        data = request.get_json()
-        user_id = session['user_id']
-        skill_name = data.get('skill')
-        new_level = data.get('level')
-        completion_data = data.get('completion_data', {})
+#     try:
+#         data = request.get_json()
+#         user_id = session['user_id']
+#         skill_name = data.get('skill')
+#         new_level = data.get('level')
+#         completion_data = data.get('completion_data', {})
         
-        result = bert_learning_system.update_skill_progress(
-            user_id, skill_name, new_level, completion_data
-        )
+#         result = bert_learning_system.update_skill_progress(
+#             user_id, skill_name, new_level, completion_data
+#         )
         
-        return jsonify(result)
+#         return jsonify(result)
         
-    except Exception as e:
-        logger.error(f"Progress update error: {e}")
-        return jsonify({'error': str(e)}), 500
+#     except Exception as e:
+#         logger.error(f"Progress update error: {e}")
+#         return jsonify({'error': str(e)}), 500
 
-@app.route('/generate_visualization/<viz_type>')
-def generate_visualization(viz_type):
-    if 'user_id' not in session:
-        return jsonify({'error': 'Not authenticated'}), 401
+# @app.route('/generate_visualization/<viz_type>')
+# def generate_visualization(viz_type):
+#     if 'user_id' not in session:
+#         return jsonify({'error': 'Not authenticated'}), 401
     
-    try:
-        user_id = session['user_id']
+#     try:
+#         user_id = session['user_id']
         
-        if user_id not in bert_learning_system.user_profiles:
-            return jsonify({'error': 'Profile not found'}), 404
+#         if user_id not in bert_learning_system.user_profiles:
+#             return jsonify({'error': 'Profile not found'}), 404
         
-        profile = bert_learning_system.user_profiles[user_id]
+#         profile = bert_learning_system.user_profiles[user_id]
         
-        if viz_type == 'skills_radar':
-            skills = profile['skills']
-            save_path = f'static/visualizations/{user_id}_skills_radar.png'
-            result = visualization_engine.plot_skill_radar(skills, save_path)
+#         if viz_type == 'skills_radar':
+#             skills = profile['skills']
+#             save_path = f'static/visualizations/{user_id}_skills_radar.png'
+#             result = visualization_engine.plot_skill_radar(skills, save_path)
             
-        elif viz_type == 'learning_progress':
-            learning_path = profile.get('learning_path')
-            if learning_path:
-                save_path = f'static/visualizations/{user_id}_progress.png'
-                result = visualization_engine.plot_learning_progress(learning_path, save_path=save_path)
-            else:
-                return jsonify({'error': 'No learning path found'}), 404
+#         elif viz_type == 'learning_progress':
+#             learning_path = profile.get('learning_path')
+#             if learning_path:
+#                 save_path = f'static/visualizations/{user_id}_progress.png'
+#                 result = visualization_engine.plot_learning_progress(learning_path, save_path=save_path)
+#             else:
+#                 return jsonify({'error': 'No learning path found'}), 404
                 
-        elif viz_type == 'assessment_results':
-            assessments = profile.get('assessments', {})
-            if assessments:
-                save_path = f'static/visualizations/{user_id}_assessments.png'
-                result = visualization_engine.plot_assessment_results(assessments, save_path)
-            else:
-                return jsonify({'error': 'No assessment data found'}), 404
+#         elif viz_type == 'assessment_results':
+#             assessments = profile.get('assessments', {})
+#             if assessments:
+#                 save_path = f'static/visualizations/{user_id}_assessments.png'
+#                 result = visualization_engine.plot_assessment_results(assessments, save_path)
+#             else:
+#                 return jsonify({'error': 'No assessment data found'}), 404
         
-        else:
-            return jsonify({'error': 'Invalid visualization type'}), 400
+#         else:
+#             return jsonify({'error': 'Invalid visualization type'}), 400
         
-        return jsonify({'status': 'success', 'path': result})
+#         return jsonify({'status': 'success', 'path': result})
         
-    except Exception as e:
-        logger.error(f"Visualization error: {e}")
-        return jsonify({'error': str(e)}), 500
+#     except Exception as e:
+#         logger.error(f"Visualization error: {e}")
+#         return jsonify({'error': str(e)}), 500
 
 # Helper functions
 def categorize_skill(skill_name):
@@ -2323,22 +2323,22 @@ def save_assessment_result(user_id, assessment_result):
     conn.commit()
     conn.close()
 
-@app.route('/')
-def index():
-    if 'user_id' in session:
-        return redirect(url_for('dashboard'))
-    return render_template('index.html')
+# @app.route('/')
+# def index():
+#     if 'user_id' in session:
+#         return redirect(url_for('dashboard'))
+#     return render_template('index.html')
 
-# Error handlers
-@app.errorhandler(404)
-def not_found_error(error):
-    return render_template('404.html'), 404
+# # Error handlers
+# @app.errorhandler(404)
+# def not_found_error(error):
+#     return render_template('404.html'), 404
 
-@app.errorhandler(500)
-def internal_error(error):
-    return render_template('500.html'), 500
+# @app.errorhandler(500)
+# def internal_error(error):
+#     return render_template('500.html'), 500
 
-if __name__ == '__main__':
-    logger.info("Starting BERT-Enhanced Skill Assessment System with Full Web Interface...")
-    logger.info("Features: BERT semantic analysis, skill gap analysis, learning roadmaps, assessments")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+# if __name__ == '__main__':
+#     logger.info("Starting BERT-Enhanced Skill Assessment System with Full Web Interface...")
+#     logger.info("Features: BERT semantic analysis, skill gap analysis, learning roadmaps, assessments")
+#     app.run(debug=True, host='0.0.0.0', port=5000)
