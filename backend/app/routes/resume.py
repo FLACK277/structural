@@ -3,7 +3,8 @@ from fastapi.responses import JSONResponse
 from typing import List, Optional, Dict, Any
 import io
 import json
-from app.models.skill.skill_matcher import PersonalizedLearningSystem, Skill, LearningResource, LearningPath
+# Remove the top-level import and instantiation
+# from app.models.skill.skill_matcher import PersonalizedLearningSystem, Skill, LearningResource, LearningPath
 from pydantic import BaseModel
 import os
 import uuid
@@ -21,8 +22,16 @@ UPLOAD_DIR = "uploads"
 
 router = APIRouter()
 
-# Initialize the BERT-enhanced system (singleton)
-bert_learning_system = PersonalizedLearningSystem()
+# Lazy loading for the BERT-enhanced system
+_bert_learning_system = None
+
+def get_bert_learning_system():
+    """Lazy load the personalized learning system only when needed"""
+    global _bert_learning_system
+    if _bert_learning_system is None:
+        from app.models.skill.skill_matcher import PersonalizedLearningSystem, Skill, LearningResource, LearningPath
+        _bert_learning_system = PersonalizedLearningSystem()
+    return _bert_learning_system
 
 JWT_SECRET = "your_super_secret_key"  # Change this in production
 JWT_ALGORITHM = "HS256"
@@ -70,6 +79,9 @@ class UserOut(BaseModel):
 @router.post('/api/extract_skills')
 async def api_extract_skills(resume: UploadFile = File(...)):
     try:
+        # Lazy load the learning system
+        bert_learning_system = get_bert_learning_system()
+        
         # Ensure the uploads directory exists
         os.makedirs(UPLOAD_DIR, exist_ok=True)
         # Save the uploaded file
@@ -89,6 +101,9 @@ async def api_extract_skills(resume: UploadFile = File(...)):
 @router.post('/api/extract_certificate_skills')
 async def api_extract_certificate_skills(certificate: UploadFile = File(...)):
     try:
+        # Lazy load the learning system
+        bert_learning_system = get_bert_learning_system()
+        
         os.makedirs(UPLOAD_DIR, exist_ok=True)
         unique_filename = f"{uuid.uuid4()}_{certificate.filename}"
         file_location = os.path.join(UPLOAD_DIR, unique_filename)
@@ -109,6 +124,9 @@ class AssessmentRequest(BaseModel):
 @router.post('/api/assess_skill')
 async def api_assess_skill(request: AssessmentRequest):
     try:
+        # Lazy load the learning system
+        bert_learning_system = get_bert_learning_system()
+        
         result = bert_learning_system.assessment_engine.conduct_assessment(
             request.user_id, request.skill, request.num_questions)
         return result
@@ -124,6 +142,9 @@ class LearningPathRequest(BaseModel):
 @router.post('/api/generate_learning_path')
 async def api_generate_learning_path(request: LearningPathRequest):
     try:
+        # Lazy load the learning system
+        bert_learning_system = get_bert_learning_system()
+        
         current_skills = [Skill(**s.dict()) for s in request.current_skills]
         path = bert_learning_system.path_generator.generate_learning_path(
             current_skills, request.target_skills, request.preferences)
@@ -149,6 +170,9 @@ async def api_process_profile(
     career_goal: str = Form("")
 ):
     try:
+        # Lazy load the learning system
+        bert_learning_system = get_bert_learning_system()
+        
         cert_files = certificates or []
         resume_path = None
         if resume:
@@ -195,6 +219,9 @@ class SkillProgressRequest(BaseModel):
 @router.post('/api/update_skill_progress')
 async def api_update_skill_progress(request: SkillProgressRequest):
     try:
+        # Lazy load the learning system
+        bert_learning_system = get_bert_learning_system()
+        
         result = bert_learning_system.update_skill_progress(
             request.user_id, request.skill_name, request.new_level, request.completion_data)
         return result
@@ -204,6 +231,8 @@ async def api_update_skill_progress(request: SkillProgressRequest):
 @router.get('/api/dashboard/{user_id}')
 async def api_dashboard(user_id: str):
     try:
+        # Lazy load the learning system
+        bert_learning_system = get_bert_learning_system()
         data = bert_learning_system.get_dashboard_data(user_id)
         return data
     except Exception as e:
