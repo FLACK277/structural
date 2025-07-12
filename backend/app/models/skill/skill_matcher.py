@@ -13,16 +13,17 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
-import spacy
+# Remove heavy imports from top level - will import them lazily
+# import spacy
 import cv2
 import pytesseract
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers
+# import tensorflow as tf
+# from tensorflow import keras
+# from tensorflow.keras import layers
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import StandardScaler
-from sentence_transformers import SentenceTransformer  # BERT Integration
+# from sentence_transformers import SentenceTransformer  # BERT Integration
 import warnings
 import traceback
 import hashlib
@@ -41,34 +42,84 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for, s
 from typing import List, Dict, Optional, Tuple, Union, Any
 import uuid
 from dataclasses import dataclass
-import tensorflow_hub as hub
+# import tensorflow_hub as hub
 
 # NEW SKILLMATCHER
 
-# Load spaCy model
-try:
-    nlp = spacy.load("en_core_web_sm")
-except OSError:
-    logger.warning("spaCy model not found. Installing...")
-    os.system("python -m spacy download en_core_web_sm")
-    nlp = spacy.load("en_core_web_sm")
+# Remove immediate model loading - will load lazily
+# try:
+#     nlp = spacy.load("en_core_web_sm")
+# except OSError:
+#     logger.warning("spaCy model not found. Installing...")
+#     os.system("python -m spacy download en_core_web_sm")
+#     nlp = spacy.load("en_core_web_sm")
 
 # Set max length after ensuring nlp is defined
-nlp.max_length = 2_000_000  # or higher if needed
+# nlp.max_length = 2_000_000  # or higher if needed
 
 # Suppress warnings
 warnings.filterwarnings('ignore')
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
+# Global variables for lazy loading
+_nlp = None
+_bert_model = None
+_use_model = None
 
-# Load spaCy model
-try:
-    nlp = spacy.load("en_core_web_sm")
-except OSError:
-    logger.warning("spaCy model not found. Installing...")
-    os.system("python -m spacy download en_core_web_sm")
-    nlp = spacy.load("en_core_web_sm")
+def get_nlp():
+    """Lazy load spaCy model"""
+    global _nlp
+    if _nlp is None:
+        import spacy
+        try:
+            _nlp = spacy.load("en_core_web_sm")
+            _nlp.max_length = 2_000_000
+        except OSError:
+            logger.warning("spaCy model not found. Installing...")
+            os.system("python -m spacy download en_core_web_sm")
+            _nlp = spacy.load("en_core_web_sm")
+    return _nlp
+
+def get_bert_model():
+    """Lazy load BERT model"""
+    global _bert_model
+    if _bert_model is None:
+        from sentence_transformers import SentenceTransformer
+        try:
+            _bert_model = SentenceTransformer('all-MiniLM-L6-v2')
+            logger.info("BERT model loaded successfully")
+        except Exception as e:
+            logger.error(f"Error loading BERT model: {e}")
+            _bert_model = None
+    return _bert_model
+
+def get_use_model():
+    """Lazy load Universal Sentence Encoder"""
+    global _use_model
+    if _use_model is None:
+        import tensorflow_hub as hub
+        try:
+            _use_model = hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
+        except Exception as e:
+            logger.warning(f"Universal Sentence Encoder not available: {e}")
+            _use_model = None
+    return _use_model
+
+def get_tensorflow():
+    """Lazy load TensorFlow"""
+    import tensorflow as tf
+    return tf
+
+def get_keras():
+    """Lazy load Keras"""
+    from tensorflow import keras
+    return keras
+
+def get_keras_layers():
+    """Lazy load Keras layers"""
+    from tensorflow.keras import layers
+    return layers
 
 @dataclass
 class Skill:
@@ -101,22 +152,13 @@ class BERTEnhancedResumeParser:
     
     def __init__(self):
         # Initialize spaCy
-        self.nlp = nlp
+        self.nlp = get_nlp()
         
         # BERT Integration
-        try:
-            self.bert_model = SentenceTransformer('all-MiniLM-L6-v2')
-            logger.info("BERT model loaded successfully")
-        except Exception as e:
-            logger.error(f"Error loading BERT model: {e}")
-            self.bert_model = None
+        self.bert_model = get_bert_model()
         
         # Keep Universal Sentence Encoder as fallback
-        try:
-            self.use_model = hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
-        except Exception as e:
-            logger.warning(f"Universal Sentence Encoder not available: {e}")
-            self.use_model = None
+        self.use_model = get_use_model()
         
         # Enhanced skill database
         self.skill_keywords = {
@@ -441,12 +483,12 @@ class BERTEnhancedResumeParser:
                 sentence_embeddings = self.use_model(sentences[:3])
                 context_embeddings = self.use_model(skill_contexts)
                 
-                similarities = tf.keras.utils.cosine_similarity(
+                similarities = get_tensorflow().keras.utils.cosine_similarity(
                     sentence_embeddings, 
-                    tf.reduce_mean(context_embeddings, axis=0, keepdims=True)
+                    get_tensorflow().reduce_mean(context_embeddings, axis=0, keepdims=True)
                 )
                 
-                return float(tf.reduce_mean(similarities))
+                return float(get_tensorflow().reduce_mean(similarities))
             except Exception as e:
                 logger.error(f"Error with USE: {e}")
         
@@ -617,34 +659,30 @@ class SkillAssessmentEngine:
         self.assessment_model = self._build_assessment_model()
         
         # BERT integration for assessment enhancement
-        try:
-            self.bert_model = SentenceTransformer('all-MiniLM-L6-v2')
-        except Exception as e:
-            logger.error(f"Error loading BERT for assessment: {e}")
-            self.bert_model = None
+        self.bert_model = get_bert_model()
     
     def _build_assessment_model(self):
         """Build TensorFlow model for adaptive skill assessment"""
         try:
             # Input layers
-            question_input = keras.Input(shape=(100,), name='question_embedding')
-            user_history = keras.Input(shape=(50,), name='user_history')
+            question_input = get_keras().Input(shape=(100,), name='question_embedding')
+            user_history = get_keras().Input(shape=(50,), name='user_history')
             
             # Dense layers for processing
-            question_dense = layers.Dense(64, activation='relu')(question_input)
-            question_dense = layers.Dropout(0.3)(question_dense)
+            question_dense = get_keras_layers().Dense(64, activation='relu')(question_input)
+            question_dense = get_keras_layers().Dropout(0.3)(question_dense)
             
-            history_dense = layers.Dense(32, activation='relu')(user_history)
-            history_dense = layers.Dropout(0.3)(history_dense)
+            history_dense = get_keras_layers().Dense(32, activation='relu')(user_history)
+            history_dense = get_keras_layers().Dropout(0.3)(history_dense)
             
             # Combine features
-            combined = tf.keras.layers.concatenate([question_dense, history_dense])
-            combined = layers.Dense(32, activation='relu')(combined)
+            combined = get_tensorflow().keras.layers.concatenate([question_dense, history_dense])
+            combined = get_keras_layers().Dense(32, activation='relu')(combined)
             
             # Output layer for difficulty prediction
-            output = layers.Dense(4, activation='softmax', name='difficulty_prediction')(combined)
+            output = get_keras_layers().Dense(4, activation='softmax', name='difficulty_prediction')(combined)
             
-            model = tf.keras.Model(inputs=[question_input, user_history], outputs=output)
+            model = get_keras().Model(inputs=[question_input, user_history], outputs=output)
             model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
             
             return model
@@ -1025,11 +1063,7 @@ class LearningPathGenerator:
         self.skill_prerequisites = self._define_skill_prerequisites()
         
         # BERT integration for better resource matching
-        try:
-            self.bert_model = SentenceTransformer('all-MiniLM-L6-v2')
-        except Exception as e:
-            logger.error(f"Error loading BERT for learning paths: {e}")
-            self.bert_model = None
+        self.bert_model = get_bert_model()
         
         # TensorFlow model for learning path optimization
         self.recommendation_model = self._build_recommendation_model()
@@ -1038,24 +1072,24 @@ class LearningPathGenerator:
         """Build TensorFlow model for learning resource recommendation"""
         try:
             # User profile input
-            user_skills = keras.Input(shape=(50,), name='user_skills')
-            user_preferences = keras.Input(shape=(20,), name='user_preferences')
+            user_skills = get_keras().Input(shape=(50,), name='user_skills')
+            user_preferences = get_keras().Input(shape=(20,), name='user_preferences')
             
             # Resource features input
-            resource_features = keras.Input(shape=(30,), name='resource_features')
+            resource_features = get_keras().Input(shape=(30,), name='resource_features')
             
             # Neural network layers
-            user_embedding = layers.Dense(32, activation='relu')(tf.keras.layers.concatenate([user_skills, user_preferences]))
-            user_embedding = layers.Dropout(0.3)(user_embedding)
+            user_embedding = get_keras_layers().Dense(32, activation='relu')(get_tensorflow().keras.layers.concatenate([user_skills, user_preferences]))
+            user_embedding = get_keras_layers().Dropout(0.3)(user_embedding)
             
-            resource_embedding = layers.Dense(32, activation='relu')(resource_features)
-            resource_embedding = layers.Dropout(0.3)(resource_embedding)
+            resource_embedding = get_keras_layers().Dense(32, activation='relu')(resource_features)
+            resource_embedding = get_keras_layers().Dropout(0.3)(resource_embedding)
             
             # Compute similarity
-            similarity = tf.keras.layers.Dot(axes=1)([user_embedding, resource_embedding])
-            similarity = layers.Dense(1, activation='sigmoid')(similarity)
+            similarity = get_tensorflow().keras.layers.Dot(axes=1)([user_embedding, resource_embedding])
+            similarity = get_keras_layers().Dense(1, activation='sigmoid')(similarity)
             
-            model = tf.keras.Model(inputs=[user_skills, user_preferences, resource_features], outputs=similarity)
+            model = get_keras().Model(inputs=[user_skills, user_preferences, resource_features], outputs=similarity)
             model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
             
             return model
