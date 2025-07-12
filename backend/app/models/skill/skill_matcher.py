@@ -2,6 +2,10 @@ import os
 import sqlite3
 import json
 import logging
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 import pickle
 import numpy as np
 import pandas as pd
@@ -39,10 +43,17 @@ import uuid
 from dataclasses import dataclass
 import tensorflow_hub as hub
 
+# NEW SKILLMATCHER
+
+# Load spaCy model
 try:
     nlp = spacy.load("en_core_web_sm")
 except OSError:
-    ...
+    logger.warning("spaCy model not found. Installing...")
+    os.system("python -m spacy download en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
+
+# Set max length after ensuring nlp is defined
 nlp.max_length = 2_000_000  # or higher if needed
 
 # Suppress warnings
@@ -50,9 +61,6 @@ warnings.filterwarnings('ignore')
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
-# Set up logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 # Load spaCy model
 try:
@@ -209,7 +217,7 @@ class BERTEnhancedResumeParser:
         except Exception as e:
             logger.error(f"Error extracting from PDF: {e}")
             return "Sample extracted text from PDF resume with skills like Python, Machine Learning, TensorFlow, SQL"
-    
+
     def _extract_from_pdf_content(self, content: bytes) -> str:
         """Extract text from PDF content"""
         try:
@@ -619,22 +627,22 @@ class SkillAssessmentEngine:
         """Build TensorFlow model for adaptive skill assessment"""
         try:
             # Input layers
-            question_input = Input(shape=(100,), name='question_embedding')
-            user_history = Input(shape=(50,), name='user_history')
+            question_input = keras.Input(shape=(100,), name='question_embedding')
+            user_history = keras.Input(shape=(50,), name='user_history')
             
             # Dense layers for processing
-            question_dense = Dense(64, activation='relu')(question_input)
-            question_dense = Dropout(0.3)(question_dense)
+            question_dense = layers.Dense(64, activation='relu')(question_input)
+            question_dense = layers.Dropout(0.3)(question_dense)
             
-            history_dense = Dense(32, activation='relu')(user_history)
-            history_dense = Dropout(0.3)(history_dense)
+            history_dense = layers.Dense(32, activation='relu')(user_history)
+            history_dense = layers.Dropout(0.3)(history_dense)
             
             # Combine features
             combined = tf.keras.layers.concatenate([question_dense, history_dense])
-            combined = Dense(32, activation='relu')(combined)
+            combined = layers.Dense(32, activation='relu')(combined)
             
             # Output layer for difficulty prediction
-            output = Dense(4, activation='softmax', name='difficulty_prediction')(combined)
+            output = layers.Dense(4, activation='softmax', name='difficulty_prediction')(combined)
             
             model = tf.keras.Model(inputs=[question_input, user_history], outputs=output)
             model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
@@ -1030,22 +1038,22 @@ class LearningPathGenerator:
         """Build TensorFlow model for learning resource recommendation"""
         try:
             # User profile input
-            user_skills = Input(shape=(50,), name='user_skills')
-            user_preferences = Input(shape=(20,), name='user_preferences')
+            user_skills = keras.Input(shape=(50,), name='user_skills')
+            user_preferences = keras.Input(shape=(20,), name='user_preferences')
             
             # Resource features input
-            resource_features = Input(shape=(30,), name='resource_features')
+            resource_features = keras.Input(shape=(30,), name='resource_features')
             
             # Neural network layers
-            user_embedding = Dense(32, activation='relu')(tf.keras.layers.concatenate([user_skills, user_preferences]))
-            user_embedding = Dropout(0.3)(user_embedding)
+            user_embedding = layers.Dense(32, activation='relu')(tf.keras.layers.concatenate([user_skills, user_preferences]))
+            user_embedding = layers.Dropout(0.3)(user_embedding)
             
-            resource_embedding = Dense(32, activation='relu')(resource_features)
-            resource_embedding = Dropout(0.3)(resource_embedding)
+            resource_embedding = layers.Dense(32, activation='relu')(resource_features)
+            resource_embedding = layers.Dropout(0.3)(resource_embedding)
             
             # Compute similarity
             similarity = tf.keras.layers.Dot(axes=1)([user_embedding, resource_embedding])
-            similarity = Dense(1, activation='sigmoid')(similarity)
+            similarity = layers.Dense(1, activation='sigmoid')(similarity)
             
             model = tf.keras.Model(inputs=[user_skills, user_preferences, resource_features], outputs=similarity)
             model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
@@ -1337,7 +1345,6 @@ class PersonalizedLearningSystem:
             }
             self.user_profiles[user_id] = profile_obj
             # --- Persist to SQLite ---
-            from app.models.skill.skill_matcher import save_user_profile
             save_user_profile(user_id, profile_obj)
             return {
                 'user_id': user_id,
@@ -1447,11 +1454,10 @@ class PersonalizedLearningSystem:
             return {'error': str(e)}
     
     def get_dashboard_data(self, user_id: str) -> Dict[str, Any]:
-        """Get dashboard data for user interface"""
+        
+        # Get dashboard data for user interface
         try:
             # Always load from SQLite to ensure persistence and freshness
-            from app.models.skill.skill_matcher import get_user_profile, Skill, LearningPath
-            from datetime import datetime
             db_profile = get_user_profile(user_id)
             if db_profile:
                 # Deserialize skills as Skill objects if they are dicts
@@ -1477,6 +1483,7 @@ class PersonalizedLearningSystem:
                 self.user_profiles[user_id] = db_profile
             else:
                 return {'error': 'User profile not found'}
+            
             profile = self.user_profiles[user_id]
             skills = profile['skills']
             
@@ -1505,9 +1512,10 @@ class PersonalizedLearningSystem:
             else:
                 progress_percentage = 0
 
-            # --- Resume Insights Additions ---
+            # Resume Insights Additions
             education = profile.get('education', [])
-            career_goals = profile.get('career_goal', [])
+            career_goal = profile.get('career_goal', '')
+            
             # Resume skills with confidence
             resume_skills = [
                 {
@@ -1516,829 +1524,119 @@ class PersonalizedLearningSystem:
                     'level': skill.level,
                     'category': skill.category,
                     'source': skill.source
-                }
-                for skill in skills if skill.source == 'resume' or skill.source == 'resume_bert' or skill.source == 'resume_traditional' or skill.source == 'resume_hybrid'
+                } for skill in skills
             ]
-            # Profile completeness: percent of fields filled
-            fields = [profile.get('name'), profile.get('headline'), education, profile.get('location'), career_goals, skills]
-            filled = sum(1 for f in fields if f and (isinstance(f, list) and len(f) > 0 or isinstance(f, str) and f.strip() or isinstance(f, dict) and len(f) > 0))
-            completeness = int((filled / len(fields)) * 100)
-            # Career goals as list
-            if isinstance(career_goals, str):
-                career_goals = [career_goals] if career_goals else []
-            elif not isinstance(career_goals, list):
-                career_goals = []
             
-            # Prepare learning_path data for response
-            learning_path_data = None
-            # Custom skill gap: any skill with confidence < 0.9
-            custom_skills_gap = [
-                {
-                    'name': skill.name,
-                    'current_level': float(skill.confidence),
-                    'required_level': 0.9
-                }
-                for skill in skills if hasattr(skill, 'confidence') and float(skill.confidence) < 0.9
-            ]
-            if profile.get('learning_path'):
-                learning_path = profile['learning_path']
-                learning_path_data = {
-                    # Use custom skill gap logic
-                    'skills_gap': custom_skills_gap,
-                    'recommended_resources': [
-                        {
-                            'title': resource.title,
-                            'description': resource.description,
-                            'difficulty': resource.difficulty,
-                            'duration': resource.duration,
-                            'skills': resource.skills,
-                            'rating': resource.rating,
-                            'url': resource.url
-                        } for resource in learning_path.recommended_resources
-                    ] if hasattr(learning_path, 'recommended_resources') else [],
-                    'estimated_completion': learning_path.estimated_completion if hasattr(learning_path, 'estimated_completion') else 0,
-                    'priority_order': learning_path.priority_order if hasattr(learning_path, 'priority_order') else []
-                }
-            else:
-                # Generate a learning path if one doesn't exist
-                try:
-                    target_skills = ["machine_learning", "data_analysis", "cloud_computing", "advanced_sql", "python_advanced"]
-                    learning_path = self.path_generator.generate_learning_path(skills, target_skills)
-                    profile['learning_path'] = learning_path
-                    save_user_profile(user_id, profile)
-                    learning_path_data = {
-                        'skills_gap': custom_skills_gap,
-                        'recommended_resources': [
-                            {
-                                'title': resource.title,
-                                'description': resource.description,
-                                'difficulty': resource.difficulty,
-                                'duration': resource.duration,
-                                'skills': resource.skills,
-                                'rating': resource.rating,
-                                'url': resource.url
-                            } for resource in learning_path.recommended_resources
-                        ],
-                        'estimated_completion': learning_path.estimated_completion,
-                        'priority_order': learning_path.priority_order
-                    }
-                except Exception as e:
-                    logger.error(f"Error generating learning path: {e}")
-                    learning_path_data = {
-                        'skills_gap': custom_skills_gap,
-                        'recommended_resources': [],
-                        'estimated_completion': 30,
-                        'priority_order': ["machine_learning", "data_analysis", "cloud_computing"]
-                    }
+            # Generate skill level insights
+            skill_insights = []
+            beginner_skills = [s for s in skills if s.level < 0.4]
+            intermediate_skills = [s for s in skills if 0.4 <= s.level < 0.7]
+            advanced_skills = [s for s in skills if s.level >= 0.7]
+            
+            if beginner_skills:
+                skill_insights.append(f"You have {len(beginner_skills)} beginner-level skills to develop")
+            if intermediate_skills:
+                skill_insights.append(f"You have {len(intermediate_skills)} intermediate skills showing good progress")
+            if advanced_skills:
+                skill_insights.append(f"You have {len(advanced_skills)} advanced skills - great expertise!")
+            
+            # Calculate completion streaks and learning momentum
+            learning_momentum = 0
+            if profile.get('learning_path') and profile['learning_path'].recommended_resources:
+                completed_this_week = 0  # This would be calculated from actual completion data
+                learning_momentum = min(100, completed_this_week * 20)
             
             return {
-                "user_id": user_id,
-                "name": profile.get("name", ""),
-                "headline": profile.get("headline", ""),
-                "location": profile.get("location", ""),
-                "education": profile.get("education", []),
-                "career_goals": profile.get("career_goals", []),
-                "resume_skills": resume_skills,
-                'skill_summary': {
-                    'total_skills': len(skills),
-                    'categories': list(category_distribution.keys()),
-                    'avg_skill_level': np.mean([skill.level for skill in skills]) if skills else 0,
-                    'category_distribution': category_distribution
-                },
+                'user_id': user_id,
+                'name': profile.get('name', ''),
+                'headline': profile.get('headline', ''),
+                'location': profile.get('location', ''),
+                'career_goal': career_goal,
+                'education': education,
+                'last_updated': profile['last_updated'].strftime('%Y-%m-%d %H:%M:%S'),
+                
+                # Skills overview
+                'total_skills': len(skills),
+                'skill_categories': len(category_distribution),
                 'top_skills': [
                     {
                         'name': skill.name,
-                        'level': skill.level,
+                        'level': round(skill.level * 100),
                         'category': skill.category,
-                        'confidence': skill.confidence
+                        'confidence': round(skill.confidence * 100)
                     } for skill in top_skills
                 ],
-                'learning_progress': {
-                    'completion_percentage': progress_percentage,
-                    'days_since_start': (datetime.now() - profile['last_updated']).days,
-                    'estimated_completion': profile['learning_path'].estimated_completion if profile['learning_path'] else 0
+                
+                # Category distribution
+                'category_distribution': {
+                    category: {
+                        'count': data['count'],
+                        'avg_level': round(data['avg_level'] * 100)
+                    } for category, data in category_distribution.items()
                 },
-                'learning_path': learning_path_data,
-                'recent_assessments': profile['assessments'],
-                'next_recommendations': profile['learning_path'].recommended_resources[:3] if profile['learning_path'] else [],
-                'profile_completeness': completeness
+                
+                # Learning progress
+                'learning_progress': {
+                    'overall_percentage': round(progress_percentage),
+                    'skills_gap': profile.get('learning_path', {}).get('skills_gap', []) if profile.get('learning_path') else [],
+                    'recommended_resources_count': len(profile.get('learning_path', {}).get('recommended_resources', [])) if profile.get('learning_path') else 0,
+                    'estimated_completion_days': profile.get('learning_path', {}).get('estimated_completion', 0) if profile.get('learning_path') else 0
+                },
+                
+                # Assessments summary
+                'assessments': {
+                    skill: {
+                        'level': round(result.get('estimated_level', 0) * 100),
+                        'confidence': round(result.get('confidence', 0) * 100),
+                        'questions_answered': result.get('questions_answered', 0),
+                        'correct_answers': result.get('correct_answers', 0),
+                        'strong_areas': result.get('strong_areas', []),
+                        'areas_for_improvement': result.get('areas_for_improvement', [])
+                    } for skill, result in profile.get('assessments', {}).items()
+                },
+                
+                # Resume insights
+                'resume_insights': {
+                    'skills_by_source': {
+                        'resume_bert': len([s for s in skills if s.source == 'resume_bert']),
+                        'resume_traditional': len([s for s in skills if s.source == 'resume_traditional']),
+                        'resume_hybrid': len([s for s in skills if s.source == 'resume_hybrid']),
+                        'vision': len([s for s in skills if s.source == 'vision']),
+                        'assessment': len([s for s in skills if s.source == 'assessment'])
+                    },
+                    'skill_level_distribution': {
+                        'beginner': len(beginner_skills),
+                        'intermediate': len(intermediate_skills),
+                        'advanced': len(advanced_skills)
+                    },
+                    'insights': skill_insights
+                },
+                
+                # Learning recommendations
+                'recommendations': profile.get('recommendations', []),
+                
+                # Learning momentum and streaks
+                'learning_momentum': learning_momentum,
+                'target_skills': profile.get('target_skills', []),
+                
+                # Recent activity (placeholder for future implementation)
+                'recent_activity': [],
+                
+                # Achievements (placeholder for future implementation)
+                'achievements': []
             }
+            
         except Exception as e:
             logger.error(f"Error getting dashboard data: {e}")
             return {'error': str(e)}
 
-class VisualizationEngine:
-    """Generate visualizations for skill analysis and learning progress"""
-    
-    def __init__(self):
-        plt.style.use('seaborn-v0_8')
-        
-    def plot_skill_radar(self, skills: List[Skill], save_path: str = None) -> str:
-        """Create radar chart for skill visualization"""
-        try:
-            # Group skills by category and calculate average levels
-            categories = {}
-            for skill in skills:
-                if skill.category not in categories:
-                    categories[skill.category] = []
-                categories[skill.category].append(skill.level)
-            
-            # Calculate average level per category
-            category_levels = {cat: np.mean(levels) for cat, levels in categories.items()}
-            
-            # Prepare data for radar chart
-            labels = list(category_levels.keys())
-            values = list(category_levels.values())
-            
-            # Number of variables
-            N = len(labels)
-            
-            if N == 0:
-                return "No skills to visualize"
-            
-            # Angle for each axis
-            angles = [n / float(N) * 2 * np.pi for n in range(N)]
-            angles += angles[:1]  # Complete the circle
-            
-            # Close the plot
-            values += values[:1]
-            
-            # Create the plot
-            fig, ax = plt.subplots(figsize=(10, 10), subplot_kw=dict(projection='polar'))
-            
-            # Plot the radar chart
-            ax.plot(angles, values, 'o-', linewidth=2, label='Current Skills')
-            ax.fill(angles, values, alpha=0.25)
-            
-            # Add labels
-            ax.set_xticks(angles[:-1])
-            ax.set_xticklabels(labels)
-            ax.set_ylim(0, 1)
-            ax.set_yticks([0.2, 0.4, 0.6, 0.8, 1.0])
-            ax.set_yticklabels(['20%', '40%', '60%', '80%', '100%'])
-            ax.grid(True)
-            
-            plt.title('Skill Level Distribution by Category', size=16, pad=20)
-            plt.legend(loc='upper right', bbox_to_anchor=(0.1, 0.1))
-            
-            if save_path:
-                plt.savefig(save_path, dpi=300, bbox_inches='tight')
-                plt.close()
-                return save_path
-            else:
-                plt.show()
-                return "displayed"
-        except Exception as e:
-            logger.error(f"Error creating radar chart: {e}")
-            return "error"
-    
-    def plot_learning_progress(self, learning_path: LearningPath, 
-                             completed_resources: List[str] = None, 
-                             save_path: str = None) -> str:
-        """Create progress visualization for learning path"""
-        try:
-            if not learning_path or not learning_path.recommended_resources:
-                return "No learning path available"
-            
-            completed_resources = completed_resources or []
-            resources = learning_path.recommended_resources
-            
-            # Prepare data
-            resource_names = [r.title[:30] + '...' if len(r.title) > 30 else r.title for r in resources]
-            durations = [r.duration for r in resources]
-            completion_status = [1 if r.title in completed_resources else 0 for r in resources]
-            
-            # Create figure with subplots
-            fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
-            
-            # Progress bar chart
-            colors = ['green' if status else 'lightblue' for status in completion_status]
-            bars = ax1.barh(range(len(resource_names)), durations, color=colors)
-            
-            ax1.set_yticks(range(len(resource_names)))
-            ax1.set_yticklabels(resource_names)
-            ax1.set_xlabel('Duration (minutes)')
-            ax1.set_title('Learning Path Progress')
-            ax1.invert_yaxis()
-            
-            # Add completion percentage text
-            for i, (bar, status) in enumerate(zip(bars, completion_status)):
-                if status:
-                    ax1.text(bar.get_width()/2, bar.get_y() + bar.get_height()/2, 
-                            'Completed', ha='center', va='center', fontweight='bold')
-            
-            # Pie chart for overall progress
-            completed_count = sum(completion_status)
-            remaining_count = len(resources) - completed_count
-            
-            if completed_count > 0:
-                labels = ['Completed', 'Remaining']
-                sizes = [completed_count, remaining_count]
-                colors = ['green', 'lightcoral']
-                
-                ax2.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
-                ax2.set_title('Overall Progress')
-            else:
-                ax2.text(0.5, 0.5, 'No Progress Yet', ha='center', va='center', 
-                        transform=ax2.transAxes, fontsize=14)
-                ax2.set_title('Overall Progress')
-            
-            plt.tight_layout()
-            
-            if save_path:
-                plt.savefig(save_path, dpi=300, bbox_inches='tight')
-                plt.close()
-                return save_path
-            else:
-                plt.show()
-                return "displayed"
-        except Exception as e:
-            logger.error(f"Error creating progress chart: {e}")
-            return "error"
-    
-    def plot_assessment_results(self, assessment_data: Dict[str, Any], save_path: str = None) -> str:
-        """Visualize assessment results"""
-        try:
-            if not assessment_data:
-                return "No assessment data available"
-            
-            fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 12))
-            
-            # Skill level comparison
-            skills = list(assessment_data.keys())
-            levels = [assessment_data[skill].get('estimated_level', 0) for skill in skills]
-            confidences = [assessment_data[skill].get('confidence', 0) for skill in skills]
-            
-            x = range(len(skills))
-            width = 0.35
-            
-            ax1.bar([i - width/2 for i in x], levels, width, label='Skill Level', alpha=0.8)
-            ax1.bar([i + width/2 for i in x], confidences, width, label='Confidence', alpha=0.8)
-            ax1.set_xlabel('Skills')
-            ax1.set_ylabel('Score')
-            ax1.set_title('Skill Level vs Confidence')
-            ax1.set_xticks(x)
-            ax1.set_xticklabels(skills)
-            ax1.legend()
-            ax1.set_ylim(0, 1)
-            
-            # Assessment accuracy
-            accuracies = []
-            for skill in skills:
-                total_q = assessment_data[skill].get('questions_answered', 0)
-                correct_q = assessment_data[skill].get('correct_answers', 0)
-                accuracy = correct_q / total_q if total_q > 0 else 0
-                accuracies.append(accuracy)
-            
-            ax2.pie(accuracies, labels=skills, autopct='%1.1f%%', startangle=90)
-            ax2.set_title('Assessment Accuracy by Skill')
-            
-            # Strong vs weak areas (for first skill with data)
-            first_skill = skills[0] if skills else None
-            if first_skill and 'strong_areas' in assessment_data[first_skill]:
-                strong_areas = assessment_data[first_skill].get('strong_areas', [])
-                weak_areas = assessment_data[first_skill].get('areas_for_improvement', [])
-                
-                categories = strong_areas + weak_areas
-                performance = [0.8] * len(strong_areas) + [0.4] * len(weak_areas)
-                colors = ['green'] * len(strong_areas) + ['red'] * len(weak_areas)
-                
-                if categories:
-                    ax3.bar(categories, performance, color=colors, alpha=0.7)
-                    ax3.set_title(f'{first_skill.title()} - Area Performance')
-                    ax3.set_ylabel('Performance Score')
-                    ax3.tick_params(axis='x', rotation=45)
-            
-            # Questions answered over time (simulated)
-            questions_per_skill = [assessment_data[skill].get('questions_answered', 0) for skill in skills]
-            ax4.plot(skills, questions_per_skill, marker='o', linewidth=2, markersize=8)
-            ax4.set_title('Questions Answered per Skill')
-            ax4.set_ylabel('Number of Questions')
-            ax4.tick_params(axis='x', rotation=45)
-            
-            plt.tight_layout()
-            
-            if save_path:
-                plt.savefig(save_path, dpi=300, bbox_inches='tight')
-                plt.close()
-                return save_path
-            else:
-                plt.show()
-                return "displayed"
-        except Exception as e:
-            logger.error(f"Error creating assessment chart: {e}")
-            return "error"
-
-# # Flask Application with all original routes + BERT enhancement
-# app = Flask(__name__)
-# app.secret_key = 'bert_enhanced_skill_bridge_2025'
-# app.config['UPLOAD_FOLDER'] = 'uploads'
-# app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-
-# # Ensure directories exist
-# os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-# os.makedirs('static/visualizations', exist_ok=True)
-
-# Initialize BERT-enhanced system
-bert_learning_system = PersonalizedLearningSystem()
-visualization_engine = VisualizationEngine()
-
-# Database setup
-def init_db():
-    conn = sqlite3.connect('learning_system.db')
-    cursor = conn.cursor()
-
-    cursor.execute('''CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id TEXT UNIQUE NOT NULL,
-        username TEXT UNIQUE NOT NULL,
-        email TEXT UNIQUE NOT NULL,
-        password_hash TEXT NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        last_login TIMESTAMP
-    )''')
-
-    cursor.execute('''CREATE TABLE IF NOT EXISTS user_profiles (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id TEXT NOT NULL,
-        profile_data TEXT NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users (user_id)
-    )''')
-
-    cursor.execute('''CREATE TABLE IF NOT EXISTS file_uploads (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id TEXT NOT NULL,
-        filename TEXT NOT NULL,
-        file_type TEXT NOT NULL,
-        file_path TEXT NOT NULL,
-        uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users (user_id)
-    )''')
-
-    cursor.execute('''CREATE TABLE IF NOT EXISTS assessments (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id TEXT NOT NULL,
-        skill TEXT NOT NULL,
-        score REAL NOT NULL,
-        level TEXT NOT NULL,
-        confidence REAL NOT NULL,
-        assessment_data TEXT,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users (user_id)
-    )''')
-
-    conn.commit()
-    conn.close()
-
-init_db()
-
-# Helper functions
-def allowed_file(filename):
-    ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'txt', 'doc', 'docx'}
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-# # Authentication routes
-# @app.route('/register', methods=['GET', 'POST'])
-# def register():
-#     if request.method == 'POST':
-#         username = request.form['username']
-#         email = request.form['email']
-#         password = request.form['password']
-
-#         if not username or not email or not password:
-#             flash('All fields are required!', 'error')
-#             return render_template('register.html')
-
-#         user_id = str(uuid.uuid4())
-#         password_hash = generate_password_hash(password)
-
-#         try:
-#             conn = sqlite3.connect('learning_system.db')
-#             cursor = conn.cursor()
-#             cursor.execute('''INSERT INTO users (user_id, username, email, password_hash) VALUES (?, ?, ?, ?)''', 
-#                          (user_id, username, email, password_hash))
-#             conn.commit()
-#             conn.close()
-
-#             flash('Registration successful! Please login.', 'success')
-#             return redirect(url_for('login'))
-
-#         except sqlite3.IntegrityError:
-#             flash('Username or email already exists!', 'error')
-#             return render_template('register.html')
-
-#     return render_template('register.html')
-
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     if request.method == 'POST':
-#         username = request.form['username']
-#         password = request.form['password']
-
-#         conn = sqlite3.connect('learning_system.db')
-#         cursor = conn.cursor()
-#         cursor.execute('SELECT user_id, password_hash FROM users WHERE username = ?', (username,))
-#         user = cursor.fetchone()
-#         conn.close()
-
-#         if user and check_password_hash(user[1], password):
-#             session['user_id'] = user[0]
-#             session['username'] = username
-
-#             # Update last login
-#             conn = sqlite3.connect('learning_system.db')
-#             cursor = conn.cursor()
-#             cursor.execute('UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE user_id = ?', (user[0],))
-#             conn.commit()
-#             conn.close()
-
-#             flash('Login successful!', 'success')
-#             return redirect(url_for('dashboard'))
-#         else:
-#             flash('Invalid username or password!', 'error')
-
-#     return render_template('login.html')
-
-# @app.route('/logout')
-# def logout():
-#     session.clear()
-#     flash('You have been logged out.', 'info')
-#     return redirect(url_for('index'))
-
-# # Profile setup route with BERT enhancement
-# @app.route('/profile_setup', methods=['GET', 'POST'])
-# def profile_setup():
-#     if 'user_id' not in session:
-#         return redirect(url_for('login'))
-
-#     if request.method == 'POST':
-#         user_id = session['user_id']
-
-#         current_skills = request.form.getlist('current_skills[]')
-#         current_levels = request.form.getlist('current_levels[]')
-#         target_skills = request.form.getlist('target_skills[]')
-
-#         resume_path = None
-#         certificate_paths = []
-
-#         # Handle resume upload
-#         if 'resume' in request.files:
-#             resume_file = request.files['resume']
-#             if resume_file and resume_file.filename and allowed_file(resume_file.filename):
-#                 filename = secure_filename(resume_file.filename)
-#                 filename = f"{user_id}_resume_{filename}"
-#                 resume_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-#                 resume_file.save(resume_path)
-#                 save_file_upload(user_id, filename, 'resume', resume_path)
-
-#         # Handle certificate uploads
-#         if 'certificates' in request.files:
-#             cert_files = request.files.getlist('certificates')
-#             for cert_file in cert_files:
-#                 if cert_file and cert_file.filename and allowed_file(cert_file.filename):
-#                     filename = secure_filename(cert_file.filename)
-#                     filename = f"{user_id}_cert_{filename}"
-#                     cert_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-#                     cert_file.save(cert_path)
-#                     certificate_paths.append(cert_path)
-#                     save_file_upload(user_id, filename, 'certificate', cert_path)
-
-#         # Create manual skills
-#         manual_skills = []
-#         for skill, level in zip(current_skills, current_levels):
-#             if skill.strip():
-#                 try:
-#                     level_float = float(level) / 100.0
-#                     manual_skills.append(Skill(
-#                         name=skill.strip(),
-#                         level=level_float,
-#                         category=categorize_skill(skill.strip()),
-#                         confidence=0.8,
-#                         source='user_input'
-#                     ))
-#                 except ValueError:
-#                     continue
-
-#         try:
-#             # Process with BERT enhancement
-#             profile_result = bert_learning_system.process_user_profile(
-#                 user_id=user_id,
-#                 resume_path=resume_path,
-#                 certificate_paths=certificate_paths,
-#                 target_skills=[s.strip() for s in target_skills if s.strip()],
-#                 name=request.form.get('name'),
-#                 headline=request.form.get('headline'),
-#                 education=request.form.getlist('education[]'),
-#                 location=request.form.get('location'),
-#                 career_goal=request.form.get('career_goal')
-#             )
-
-#             # Add manual skills
-#             if user_id in bert_learning_system.user_profiles:
-#                 bert_learning_system.user_profiles[user_id]['skills'].extend(manual_skills)
-
-#             save_user_profile(user_id, profile_result)
-
-#             flash('Profile created successfully with BERT analysis!', 'success')
-#             return redirect(url_for('dashboard'))
-
-#         except Exception as e:
-#             flash(f'Error processing profile: {str(e)}', 'error')
-#             logger.error(f"Profile setup error: {e}")
-#             return render_template('profile_setup.html')
-
-#     return render_template('profile_setup.html')
-
-# # BERT-enhanced dashboard
-# @app.route('/dashboard')
-# def dashboard():
-#     if 'user_id' not in session:
-#         return redirect(url_for('login'))
-
-#     user_id = session['user_id']
-#     profile_data = get_user_profile(user_id)
-#     if not profile_data:
-#         return redirect(url_for('profile_setup'))
-
-#     # Get BERT-enhanced dashboard data
-#     dashboard_data = bert_learning_system.get_dashboard_data(user_id)
-    
-#     # Generate visualizations
-#     if user_id in bert_learning_system.user_profiles:
-#         skills = bert_learning_system.user_profiles[user_id]['skills']
-        
-#         # Create skill radar chart
-#         radar_path = f'static/visualizations/{user_id}_skills_radar.png'
-#         visualization_engine.plot_skill_radar(skills, radar_path)
-        
-#         # Create learning progress chart if learning path exists
-#         learning_path = bert_learning_system.user_profiles[user_id].get('learning_path')
-#         if learning_path:
-#             progress_path = f'static/visualizations/{user_id}_progress.png'
-#             visualization_engine.plot_learning_progress(learning_path, save_path=progress_path)
-
-#     return render_template('dashboard.html', 
-#                          dashboard_data=dashboard_data,
-#                          username=session.get('username'))
-
-# # Skill assessment route
-# @app.route('/assessment/<skill>')
-# def skill_assessment(skill):
-#     if 'user_id' not in session:
-#         return redirect(url_for('login'))
-    
-#     return render_template('assessment.html', skill=skill)
-
-# @app.route('/conduct_assessment', methods=['POST'])
-# def conduct_assessment():
-#     if 'user_id' not in session:
-#         return jsonify({'error': 'Not authenticated'}), 401
-    
-#     try:
-#         data = request.get_json()
-#         user_id = session['user_id']
-#         skill = data.get('skill')
-#         num_questions = data.get('num_questions', 10)
-        
-#         # Conduct BERT-enhanced assessment
-#         assessment_result = bert_learning_system.assessment_engine.conduct_assessment(
-#             user_id, skill, num_questions
-#         )
-        
-#         # Save assessment result
-#         save_assessment_result(user_id, assessment_result)
-        
-#         return jsonify(assessment_result)
-        
-#     except Exception as e:
-#         logger.error(f"Assessment error: {e}")
-#         return jsonify({'error': str(e)}), 500
-
-# # Learning path route
-# @app.route('/learning_path')
-# def learning_path():
-#     if 'user_id' not in session:
-#         return redirect(url_for('login'))
-    
-#     user_id = session['user_id']
-    
-#     if user_id in bert_learning_system.user_profiles:
-#         learning_path = bert_learning_system.user_profiles[user_id].get('learning_path')
-#         return render_template('learning_path.html', learning_path=learning_path)
-    
-#     return redirect(url_for('profile_setup'))
-
-# # API endpoints
-# @app.route('/upload_resume', methods=['POST'])
-# def upload_resume():
-#     try:
-#         user_id = request.form.get('userId') or session.get('user_id')
-#         resume_file = request.files.get('resume')
-#         manual_skills_json = request.form.get('manual_skills')
-
-#         manual_skills = []
-#         if manual_skills_json:
-#             manual_skills = json.loads(manual_skills_json)
-
-#         # Process with BERT enhancement
-#         result = bert_learning_system.process_user_profile(
-#             user_id=user_id,
-#             resume_path=resume_file,
-#             target_skills=[]
-#         )
-
-#         return jsonify({
-#             'status': 'success',
-#             'message': 'Resume processed with BERT analysis',
-#             'user_id': user_id,
-#             'bert_analysis': result,
-#             'extracted_skills': result.get('extracted_skills', [])
-#         })
-
-#     except Exception as e:
-#         logger.error(f"Error in upload_resume: {e}")
-#         return jsonify({'status': 'error', 'message': str(e)}), 500
-
-# @app.route('/skill_gap_analysis', methods=['POST'])
-# def skill_gap_analysis():
-#     try:
-#         data = request.get_json()
-#         user_skills = data.get('skills', [])
-#         target_job = data.get('target_job', '')
-
-#         if not user_skills or not target_job:
-#             return jsonify({'error': 'Skills and target job required'}), 400
-
-#         # BERT-powered skill gap analysis
-#         gap_analysis = bert_learning_system.path_generator.skill_gap_analyzer.analyze_skill_gaps(
-#             user_skills, target_job
-#         )
-
-#         if 'skill_gaps' in gap_analysis:
-#             roadmap = bert_learning_system.path_generator.skill_gap_analyzer.generate_learning_roadmap(
-#                 gap_analysis['skill_gaps']
-#             )
-#             gap_analysis['learning_roadmap'] = roadmap
-
-#         return jsonify(gap_analysis)
-
-#     except Exception as e:
-#         logger.error(f"Error in skill gap analysis: {e}")
-#         return jsonify({'error': str(e)}), 500
-
-# @app.route('/update_progress', methods=['POST'])
-# def update_progress():
-#     if 'user_id' not in session:
-#         return jsonify({'error': 'Not authenticated'}), 401
-    
-#     try:
-#         data = request.get_json()
-#         user_id = session['user_id']
-#         skill_name = data.get('skill')
-#         new_level = data.get('level')
-#         completion_data = data.get('completion_data', {})
-        
-#         result = bert_learning_system.update_skill_progress(
-#             user_id, skill_name, new_level, completion_data
-#         )
-        
-#         return jsonify(result)
-        
-#     except Exception as e:
-#         logger.error(f"Progress update error: {e}")
-#         return jsonify({'error': str(e)}), 500
-
-# @app.route('/generate_visualization/<viz_type>')
-# def generate_visualization(viz_type):
-#     if 'user_id' not in session:
-#         return jsonify({'error': 'Not authenticated'}), 401
-    
-#     try:
-#         user_id = session['user_id']
-        
-#         if user_id not in bert_learning_system.user_profiles:
-#             return jsonify({'error': 'Profile not found'}), 404
-        
-#         profile = bert_learning_system.user_profiles[user_id]
-        
-#         if viz_type == 'skills_radar':
-#             skills = profile['skills']
-#             save_path = f'static/visualizations/{user_id}_skills_radar.png'
-#             result = visualization_engine.plot_skill_radar(skills, save_path)
-            
-#         elif viz_type == 'learning_progress':
-#             learning_path = profile.get('learning_path')
-#             if learning_path:
-#                 save_path = f'static/visualizations/{user_id}_progress.png'
-#                 result = visualization_engine.plot_learning_progress(learning_path, save_path=save_path)
-#             else:
-#                 return jsonify({'error': 'No learning path found'}), 404
-                
-#         elif viz_type == 'assessment_results':
-#             assessments = profile.get('assessments', {})
-#             if assessments:
-#                 save_path = f'static/visualizations/{user_id}_assessments.png'
-#                 result = visualization_engine.plot_assessment_results(assessments, save_path)
-#             else:
-#                 return jsonify({'error': 'No assessment data found'}), 404
-        
-#         else:
-#             return jsonify({'error': 'Invalid visualization type'}), 400
-        
-#         return jsonify({'status': 'success', 'path': result})
-        
-#     except Exception as e:
-#         logger.error(f"Visualization error: {e}")
-#         return jsonify({'error': str(e)}), 500
-
-# Helper functions
-def categorize_skill(skill_name):
-    skill_name_lower = skill_name.lower()
-
-    if any(lang in skill_name_lower for lang in ['python', 'java', 'javascript', 'react', 'angular']):
-        return 'programming'
-    elif any(ds in skill_name_lower for ds in ['machine learning', 'data science', 'tensorflow']):
-        return 'data_science'
-    elif any(cloud in skill_name_lower for cloud in ['aws', 'azure', 'gcp', 'docker']):
-        return 'cloud'
-    elif any(db in skill_name_lower for db in ['sql', 'mongodb', 'postgresql']):
-        return 'database'
-    else:
-        return 'general'
-
-def save_file_upload(user_id, filename, file_type, file_path):
-    conn = sqlite3.connect('learning_system.db')
-    cursor = conn.cursor()
-    cursor.execute('''INSERT INTO file_uploads (user_id, filename, file_type, file_path) VALUES (?, ?, ?, ?)''', 
-                   (user_id, filename, file_type, file_path))
-    conn.commit()
-    conn.close()
-
-def save_user_profile(user_id, profile_data):
-    conn = sqlite3.connect('learning_system.db')
-    cursor = conn.cursor()
-
-    cursor.execute('SELECT id FROM user_profiles WHERE user_id = ?', (user_id,))
-    existing = cursor.fetchone()
-
-    profile_json = json.dumps(profile_data, default=str)
-
-    if existing:
-        cursor.execute('''UPDATE user_profiles SET profile_data = ?, updated_at = CURRENT_TIMESTAMP WHERE user_id = ?''', 
-                       (profile_json, user_id))
-    else:
-        cursor.execute('''INSERT INTO user_profiles (user_id, profile_data) VALUES (?, ?)''', 
-                       (user_id, profile_json))
-
-    conn.commit()
-    conn.close()
-
-def get_user_profile(user_id):
-    conn = sqlite3.connect('learning_system.db')
-    cursor = conn.cursor()
-    cursor.execute('SELECT profile_data FROM user_profiles WHERE user_id = ?', (user_id,))
-    result = cursor.fetchone()
-    conn.close()
-
-    if result:
-        return json.loads(result[0])
-    return None
-
-def save_assessment_result(user_id, assessment_result):
-    conn = sqlite3.connect('learning_system.db')
-    cursor = conn.cursor()
-    
-    cursor.execute('''INSERT INTO assessments 
-                     (user_id, skill, score, level, confidence, assessment_data) 
-                     VALUES (?, ?, ?, ?, ?, ?)''',
-                   (user_id, 
-                    assessment_result.get('skill', ''),
-                    assessment_result.get('estimated_level', 0),
-                    assessment_result.get('level', 'beginner'),
-                    assessment_result.get('confidence', 0),
-                    json.dumps(assessment_result, default=str)))
-    
-    conn.commit()
-    conn.close()
-
-# @app.route('/')
-# def index():
-#     if 'user_id' in session:
-#         return redirect(url_for('dashboard'))
-#     return render_template('index.html')
-
-# # Error handlers
-# @app.errorhandler(404)
-# def not_found_error(error):
-#     return render_template('404.html'), 404
-
-# @app.errorhandler(500)
-# def internal_error(error):
-#     return render_template('500.html'), 500
-
-# if __name__ == '__main__':
-#     logger.info("Starting BERT-Enhanced Skill Assessment System with Full Web Interface...")
-#     logger.info("Features: BERT semantic analysis, skill gap analysis, learning roadmaps, assessments")
-#     app.run(debug=True, host='0.0.0.0', port=5000)
+    # Helper functions for database operations (these would be imported from skill_matcher)
+    def save_user_profile(user_id: str, profile_data: Dict[str, Any]):
+        """Save user profile to SQLite database"""
+        # This function would be implemented in the skill_matcher module
+        pass
+
+    def get_user_profile(user_id: str) -> Dict[str, Any]:
+        """Get user profile from SQLite database"""
+        # This function would be implemented in the skill_matcher module
+        return None
