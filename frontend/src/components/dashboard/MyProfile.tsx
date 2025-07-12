@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { useAuth } from '@/lib/AuthContext';
+import { api, endpoints } from '@/lib/api'; // Add this import
 
 interface MyProfileProps {
   dashboardData?: any;
@@ -102,14 +103,16 @@ const MyProfile = ({ dashboardData, refreshDashboard, userId }: MyProfileProps) 
       formData.append('headline', headlineEdit);
       formData.append('location', locationEdit);
       formData.append('career_goal', careerGoalEdit);
-      const res = await fetch('http://localhost:8000/api/process_profile', {
+      
+      // Use the API helper for FormData
+      await api.fetch(endpoints.processProfile, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
         },
         body: formData,
       });
-      if (!res.ok) throw new Error('Failed to update profile');
+      
       setFormSuccess('Profile updated!');
       setResumeFile(null);
       setCertificateFiles([]);
@@ -117,7 +120,7 @@ const MyProfile = ({ dashboardData, refreshDashboard, userId }: MyProfileProps) 
       setCareerGoalEditing(false);
       if (refreshDashboard) refreshDashboard();
     } catch (err) {
-      setFormError('Could not update profile.');
+      setFormError(err instanceof Error ? err.message : 'Could not update profile.');
     } finally {
       setFormLoading(false);
     }

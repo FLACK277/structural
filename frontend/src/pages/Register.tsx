@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { api, endpoints } from '@/lib/api'; // Add this import
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -22,20 +23,14 @@ const Register: React.FC = () => {
     setError('');
     setSuccess('');
     try {
-      const res = await fetch('http://localhost:8000/api/register', {
+      const data = await api.fetch(endpoints.register, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password })
       });
-      const data = await res.json();
-      if (res.ok) {
-        setSuccess('Registration successful! Please login.');
-        setTimeout(() => navigate('/login'), 1500);
-      } else {
-        setError(data.detail || 'Registration failed');
-      }
+      setSuccess('Registration successful! Please login.');
+      setTimeout(() => navigate('/login'), 1500);
     } catch (err) {
-      setError('Network error');
+      setError(err instanceof Error ? err.message : 'Network error');
     } finally {
       setLoading(false);
     }
@@ -114,4 +109,4 @@ const Register: React.FC = () => {
   );
 };
 
-export default Register; 
+export default Register;

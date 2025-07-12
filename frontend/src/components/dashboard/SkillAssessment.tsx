@@ -5,6 +5,7 @@ import { Progress } from '@/components/ui/progress';
 import { Play, Trophy, Target } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/AuthContext';
+import { api, endpoints } from '@/lib/api'; // Add this import
 
 const SkillAssessment = ({ dashboardData }: { dashboardData?: any }) => {
   const navigate = useNavigate();
@@ -20,11 +21,7 @@ const SkillAssessment = ({ dashboardData }: { dashboardData?: any }) => {
       setLoading(true);
       setError('');
       try {
-        const res = await fetch(`http://localhost:8000/api/user_assessments/${userId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (!res.ok) throw new Error('Failed to fetch assessments');
-        const data = await res.json();
+        const data = await api.fetchWithAuth(`${endpoints.userAssessments}/${userId}`, token);
         setAssessments(data);
       } catch (err) {
         setError('Could not load assessments');

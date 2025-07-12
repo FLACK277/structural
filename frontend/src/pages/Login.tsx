@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { useAuth } from '@/lib/AuthContext';
+import { api, endpoints } from '@/lib/api'; // Add this import
+
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -21,25 +23,21 @@ const Login: React.FC = () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('http://localhost:8000/api/login', {
+      const data = await api.fetch(endpoints.login, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
       });
-      const data = await res.json();
-      if (res.ok && data.access_token) {
+      
+      if (data.access_token) {
         // Fetch user info from /api/me
-        const userRes = await fetch('http://localhost:8000/api/me', {
-          headers: { Authorization: `Bearer ${data.access_token}` }
-        });
-        const user = await userRes.json();
+        const user = await api.fetchWithAuth(endpoints.me, data.access_token);
         login(data.access_token, user);
         navigate('/dashboard');
       } else {
-        setError(data.detail || 'Login failed');
+        setError('Login failed');
       }
     } catch (err) {
-      setError('Network error');
+      setError(err instanceof Error ? err.message : 'Network error');
     } finally {
       setLoading(false);
     }
