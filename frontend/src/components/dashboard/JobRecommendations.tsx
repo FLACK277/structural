@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, Briefcase, IndianRupee, Star } from 'lucide-react';
+import { api, endpoints } from '@/lib/api'; // Add this import
 
 // Add type for job recommendation
 interface JobRecommendation {
@@ -47,12 +48,8 @@ const JobRecommendations = ({ dashboardData }: JobRecommendationsProps) => {
         expected_salary: dashboardData?.expected_salary || 0,
       });
       try {
-        const res = await fetch('http://localhost:8000/recommend_jobs', {
+        const data = await api.fetchWithAuth(endpoints.recommendJobs, token, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
           body: JSON.stringify({
             skills: skillsArr.map((s: any) => s.name).join(','),
             experience: dashboardData?.experience || 0,
@@ -63,19 +60,15 @@ const JobRecommendations = ({ dashboardData }: JobRecommendationsProps) => {
             expected_salary: dashboardData?.expected_salary || 0,
           }),
         });
-        const data = await res.json();
         console.log('Job recommendations API response:', data);
-        if (!res.ok) {
-          setError(data.detail || 'Failed to fetch jobs');
-          setJobs([]);
-        } else if (data.recommendations) {
+        if (data.recommendations) {
           setJobs(data.recommendations);
         } else {
           setJobs([]);
         }
       } catch (err) {
         console.error('Job fetch error:', err);
-        setError('Could not load job recommendations');
+        setError(err instanceof Error ? err.message : 'Could not load job recommendations');
         setJobs([]);
       } finally {
         setLoading(false);

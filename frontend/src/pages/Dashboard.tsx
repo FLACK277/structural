@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { api, endpoints } from '@/lib/api'; // Add this import
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('profile');
@@ -34,13 +35,7 @@ const Dashboard = () => {
       setProfileLoading(true);
       setProfileError('');
       try {
-        const res = await fetch('http://localhost:8000/api/me', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (!res.ok) throw new Error('Failed to fetch profile');
-        const data = await res.json();
+        const data = await api.fetchWithAuth(endpoints.me, token);
         setProfile(data);
       } catch (err) {
         setProfileError('Could not load profile');
@@ -56,13 +51,7 @@ const Dashboard = () => {
       setDashboardLoading(true);
       setDashboardError('');
       try {
-        const res = await fetch(`http://localhost:8000/api/dashboard/${user_id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (!res.ok) throw new Error('Failed to fetch dashboard data');
-        const data = await res.json();
+        const data = await api.fetchWithAuth(`${endpoints.dashboard}/${user_id}`, token);
         setDashboardData(data);
       } catch (err) {
         setDashboardError('Could not load dashboard data');
@@ -81,11 +70,7 @@ const Dashboard = () => {
       setAssessmentsLoading(true);
       setAssessmentsError('');
       try {
-        const res = await fetch(`http://localhost:8000/api/user_assessments/${user_id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (!res.ok) throw new Error('Failed to fetch assessments');
-        const data = await res.json();
+        const data = await api.fetchWithAuth(`${endpoints.userAssessments}/${user_id}`, token);
         setAssessments(data);
       } catch (err) {
         setAssessmentsError('Could not load assessments');
@@ -107,19 +92,11 @@ const Dashboard = () => {
     setDashboardError('');
     try {
       // Fetch profile
-      const resProfile = await fetch('http://localhost:8000/api/me', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!resProfile.ok) throw new Error('Failed to fetch profile');
-      const dataProfile = await resProfile.json();
+      const dataProfile = await api.fetchWithAuth(endpoints.me, token);
       setProfile(dataProfile);
       // Fetch dashboard
       if (dataProfile && dataProfile.user_id) {
-        const resDashboard = await fetch(`http://localhost:8000/api/dashboard/${dataProfile.user_id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (!resDashboard.ok) throw new Error('Failed to fetch dashboard data');
-        const dataDashboard = await resDashboard.json();
+        const dataDashboard = await api.fetchWithAuth(`${endpoints.dashboard}/${dataProfile.user_id}`, token);
         setDashboardData(dataDashboard);
       }
     } catch (err) {

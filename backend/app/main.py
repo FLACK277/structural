@@ -5,14 +5,11 @@ from app.routes import roles, resume, skillassess, job_recommendation_routes
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 
-
-
-
-
 app = FastAPI()
 
 origins = [
-    "http://localhost:8080",
+    "http://localhost:8080",  # Keep for local development
+    "https://structural-4y1w.vercel.app",  # Add your Vercel frontend
 ]
 
 app.add_middleware(

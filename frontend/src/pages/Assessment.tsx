@@ -4,6 +4,7 @@ import { useAuth } from '@/lib/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
+import { api, endpoints } from '@/lib/api'; // Add this import
 
 const staticSkills = [
   'python', 'machine_learning', 'javascript', 'sql', 'data_science', 'cloud_computing', 'react', 'aws', 'tensorflow', 'advanced_sql'
@@ -31,11 +32,10 @@ const Assessment = () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch(`http://localhost:8000/api/assessment_questions?skill=${encodeURIComponent(skill)}&num_questions=5`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!res.ok) throw new Error('Failed to fetch questions');
-      const data = await res.json();
+      const data = await api.fetchWithAuth(
+        `${endpoints.assessmentQuestions}?skill=${encodeURIComponent(skill)}&num_questions=5`,
+        token
+      );
       setQuestions(data);
       setAnswers({});
     } catch (err) {
@@ -68,16 +68,10 @@ const Assessment = () => {
           selected_option: Number(selected_option),
         })),
       };
-      const res = await fetch('http://localhost:8000/api/submit_assessment', {
+      const data = await api.fetchWithAuth(endpoints.submitAssessment, token, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error('Failed to submit assessment');
-      const data = await res.json();
       setResult(data);
       setStep('result');
     } catch (err) {
@@ -195,4 +189,4 @@ const Assessment = () => {
   return null;
 };
 
-export default Assessment; 
+export default Assessment;
