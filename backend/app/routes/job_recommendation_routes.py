@@ -1,24 +1,33 @@
 from fastapi import APIRouter, HTTPException
 from app.models.jobrecommendation.job_recommendation_schema import JobRecommendationRequest
-from app.models.jobrecommendation.recommendation_engine import BERTJobRecommenderSystem
 import os
-
 
 router = APIRouter()
 
-# Load the precomputed BERTJobRecommenderSystem model from pickle
+# Lazy loading for recommender system
 MODEL_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../models/jobrecommendation/bert_job_recommender.pkl'))
-recommender = None
-try:
-    recommender = BERTJobRecommenderSystem.load_model(MODEL_PATH)
-except Exception as e:
-    print(f"[Job Recommendation] Failed to load model: {e}")
+_recommender = None
+
+def get_recommender():
+    """Lazy load the recommender system only when needed"""
+    global _recommender
+    if _recommender is None:
+        try:
+            from app.models.jobrecommendation.recommendation_engine import BERTJobRecommenderSystem
+            _recommender = BERTJobRecommenderSystem.load_model(MODEL_PATH)
+            print(f"[Job Recommendation] Model loaded successfully")
+        except Exception as e:
+            print(f"[Job Recommendation] Failed to load model: {e}")
+            _recommender = None
+    return _recommender
 
 @router.post("/recommend_jobs")
 def recommend_jobs(request: JobRecommendationRequest):
     """
     Recommend jobs based on user profile input.
     """
+    # Lazy load the recommender
+    recommender = get_recommender()
     if recommender is None:
         raise HTTPException(status_code=500, detail="Model not loaded.")
     user_profile = {
