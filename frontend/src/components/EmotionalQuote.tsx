@@ -9,7 +9,7 @@ const EmotionalQuote = () => {
         <div className="max-w-4xl mx-auto">
           <div className="animate-fade-in">
             <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
-              <span className="bg-gradient-primary bg-clip-text text-transparent">
+              <span className="bg-gradient-primary bg-clip-text">
                 "You're not unskilled."
               </span>
             </h2>

@@ -5,7 +5,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-1 md:col-span-2">
-            <div className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-4">
+            <div className="text-2xl font-bold bg-gradient-primary bg-clip-text mb-4">
               SkillBridge
             </div>
             <p className="text-muted-foreground mb-6 max-w-md">
