@@ -937,7 +937,23 @@ class SkillAssessmentEngine:
             if skill not in self.assessment_questions:
                 return {'error': f'No assessment available for {skill}'}
             
-            questions = self.assessment_questions[skill]
+            # --- MODIFICATION START ---
+            
+            all_questions_for_skill = self.assessment_questions[skill]
+            
+            # Ensure we don't request more questions than are available
+            num_to_select = min(num_questions, len(all_questions_for_skill))
+            
+            # Randomly select a subset of questions
+            if len(all_questions_for_skill) > num_to_select:
+                selected_questions = random.sample(all_questions_for_skill, num_to_select)
+            else:
+                # If not enough questions to sample, just shuffle them
+                selected_questions = all_questions_for_skill
+                random.shuffle(selected_questions)
+
+            # --- MODIFICATION END ---
+            
             user_responses = []
             current_difficulty = 1  # Start with intermediate
             
@@ -952,16 +968,15 @@ class SkillAssessmentEngine:
                 'strong_areas': []
             }
             
-            # Simulate adaptive questioning
-            for i in range(min(num_questions, len(questions))):
-                question = questions[i % len(questions)]
+            # --- MODIFICATION: Loop over the randomly selected questions ---
+            for i, question in enumerate(selected_questions):
                 
                 # Simulate user response
                 simulated_response = np.random.choice([0, 1, 2, 3])
                 is_correct = simulated_response == question['correct']
                 
                 user_responses.append({
-                    'question_id': i,
+                    'question_id': i, # Using enumerate index is fine here
                     'response': simulated_response,
                     'correct': is_correct,
                     'difficulty': question['difficulty'],
@@ -983,7 +998,7 @@ class SkillAssessmentEngine:
         except Exception as e:
             logger.error(f"Error in assessment: {e}")
             return {'error': str(e)}
-    
+            
     def _calculate_skill_level(self, responses: List[Dict]) -> float:
         """Calculate estimated skill level based on responses"""
         if not responses:
