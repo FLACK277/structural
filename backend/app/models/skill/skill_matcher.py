@@ -2,6 +2,7 @@ import os
 import sqlite3
 import json
 import logging
+import random
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
