@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Index from "./pages/Index";
 import Index3D from "./pages/Index3D";
+import Demo3D from "./pages/Demo3D";
 import Dashboard from "./pages/Dashboard";
 import RecruiterDashboard from "./pages/RecruiterDashboard";
 import NotFound from "./pages/NotFound";
@@ -71,6 +72,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<HomeRedirect />} />
               <Route path="/3d" element={<Index3D />} />
+              <Route path="/demo" element={<Demo3D />} />
               <Route path="/2d" element={<Index />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />

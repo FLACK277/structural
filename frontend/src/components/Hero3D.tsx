@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import GlowingIllustration from './GlowingIllustration';
 import Scene3D from './3d/Scene3D';
 import FloatingCube from './3d/FloatingCube';
@@ -43,13 +44,26 @@ const Hero3D = () => {
               with the right opportunities through intelligent skill matching.
             </p>
             
-            <Button 
-              size="lg" 
-              className="bg-gradient-primary text-white hover:opacity-90 text-lg px-8 py-6 rounded-full animate-float"
-            >
-              Start Your Journey
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button 
+                size="lg" 
+                className="bg-gradient-primary text-white hover:opacity-90 text-lg px-8 py-6 rounded-full animate-float"
+              >
+                Start Your Journey
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              
+              <Link to="/demo">
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="text-lg px-8 py-6 rounded-full backdrop-blur-md border-white/20 hover:bg-white/10"
+                >
+                  <Sparkles className="mr-2 h-5 w-5" />
+                  View 3D Demo
+                </Button>
+              </Link>
+            </div>
           </div>
           
           {/* Glowing Illustration */}
